@@ -3,7 +3,7 @@
 	"description": "Doubly linked list code bricks for JavaScript",
 	"homepage": "http://aureooms.github.io/js-dll/",
 	"main": "js/dist/dll.js",
-	"version": "4.0.0",
+	"version": "5.0.0",
 	"repository": {
 		"url": "https://github.com/aureooms/js-dll.git",
 		"type": "git"
