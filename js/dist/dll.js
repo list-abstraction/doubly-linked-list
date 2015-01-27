@@ -3,8 +3,7 @@
 	'use strict';
 
 
-/* js/src/adt */
-/* js/src/adt/DoublyLinkedList.js */
+/* js/src/DoublyLinkedList.js */
 (function(){
 
 /**
