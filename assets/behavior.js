@@ -22,35 +22,25 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
       "depth": 1,
       "outline": []
     }, {
-      "type": "folder",
+      "type": "file",
       "data": {
-        "path": "adt",
-        "title": "adt"
+        "language": {
+          "nameMatchers": [".js"],
+          "pygmentsLexer": "javascript",
+          "multiLineComment": ["/*", "*", "*/"],
+          "singleLineComment": ["//"],
+          "ignorePrefix": "}",
+          "foldPrefix": "^",
+          "name": "JavaScript"
+        },
+        "sourcePath": "/home/aureooms/dev/js/js-dll/js/src/DoublyLinkedList.js",
+        "projectPath": "js/src/DoublyLinkedList.js",
+        "targetPath": "DoublyLinkedList",
+        "pageTitle": "DoublyLinkedList",
+        "title": "DoublyLinkedList"
       },
       "depth": 1,
-      "children": [
-        {
-          "type": "file",
-          "data": {
-            "language": {
-              "nameMatchers": [".js"],
-              "pygmentsLexer": "javascript",
-              "multiLineComment": ["/*", "*", "*/"],
-              "singleLineComment": ["//"],
-              "ignorePrefix": "}",
-              "foldPrefix": "^",
-              "name": "JavaScript"
-            },
-            "sourcePath": "/home/aureooms/dev/js/js-dll/js/src/adt/DoublyLinkedList.js",
-            "projectPath": "js/src/adt/DoublyLinkedList.js",
-            "targetPath": "adt/DoublyLinkedList",
-            "pageTitle": "adt/DoublyLinkedList",
-            "title": "DoublyLinkedList"
-          },
-          "depth": 2,
-          "outline": []
-        }
-      ]
+      "outline": []
     }
   ];
 
