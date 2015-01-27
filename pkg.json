@@ -1,10 +1,10 @@
 {
-	"name": "data-structures",
+	"name": "dll",
 	"code": {
 		"main": [
 			"js",
 			"dist",
-			"data-structures.js"
+			"dll.js"
 		],
 		"test": [
 			"test",

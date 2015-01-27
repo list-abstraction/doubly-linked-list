@@ -1,18 +1,21 @@
 {
-	"name": "aureooms-js-data-structures",
-	"description": "Data structures code bricks for JavaScript",
-	"homepage": "http://aureooms.github.io/js-data-structures/",
-	"main": "js/dist/data-structures.js",
+	"name": "aureooms-js-dll",
+	"description": "Doubly linked list code bricks for JavaScript",
+	"homepage": "http://aureooms.github.io/js-dll/",
+	"main": "js/dist/dll.js",
 	"version": "4.0.0",
 	"repository": {
-		"url": "https://github.com/aureooms/js-data-structures.git",
+		"url": "https://github.com/aureooms/js-dll.git",
 		"type": "git"
 	},
 	"keywords": [
 		"bricks",
 		"data",
+		"dll",
+		"doubly linked list",
 		"javascript",
 		"js",
+		"list",
 		"structures"
 	],
 	"scripts": {
@@ -32,7 +35,7 @@
 		"aureooms-node-package": "^2.0.2"
 	},
 	"bugs": {
-		"url": "https://github.com/aureooms/js-data-structures/issues"
+		"url": "https://github.com/aureooms/js-dll/issues"
 	},
 	"dependencies": {},
 	"license": "AGPL-3.0"

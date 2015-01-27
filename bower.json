@@ -1,10 +1,10 @@
 {
-	"homepage": "http://aureooms.github.io/js-data-structures/",
-	"name": "aureooms-js-data-structures",
+	"homepage": "http://aureooms.github.io/js-dll/",
+	"name": "aureooms-js-dll",
 	"license": "AGPL-3.0",
-	"description": "Data structures code bricks for JavaScript",
+	"description": "Doubly linked list code bricks for JavaScript",
 	"version": "4.0.0",
-	"main": "js/dist/data-structures.js",
+	"main": "js/dist/dll.js",
 	"ignore": [
 		"js/index.js",
 		"js/src",
