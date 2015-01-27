@@ -1,9 +1,9 @@
 
 
-var dllToArrayForward = function (dll) {
+var listToArrayForward = function (list) {
 	var array = [];
 
-	var it = dll.begin();
+	var it = list.begin();
 
 	var e;
 
@@ -14,10 +14,10 @@ var dllToArrayForward = function (dll) {
 	return array;
 };
 
-var dllToArrayBackward = function (dll) {
+var listToArrayBackward = function (list) {
 	var array = [];
 
-	var it = dll.rbegin();
+	var it = list.rbegin();
 
 	var e;
 
@@ -35,11 +35,11 @@ test("DoublyLinkedList", function(){
 
 	var i, j, k, n, m, it, a, b, v, first, last;
 
-	var DoublyLinkedList = datastructures.DoublyLinkedList;
+	var DoublyLinkedList = dll.DoublyLinkedList;
 
-	var dll = new DoublyLinkedList();
+	var list = new DoublyLinkedList();
 
-	deepEqual(dll.length, 0, "length is 0");
+	deepEqual(list.length, 0, "length is 0");
 
 
 	var expectedArrayForward = [];
@@ -53,13 +53,13 @@ test("DoublyLinkedList", function(){
 		n = 10;
 
 		for (i = 1; i <= n; ++i) {
-			dll.push(i);
+			list.push(i);
 			expectedArrayForward.push(i);
 			expectedArrayBackward.unshift(i);
-			deepEqual(dll.length, i, "length is " + i);
+			deepEqual(list.length, i, "length is " + i);
 
-			arrayForward = dllToArrayForward(dll);
-			arrayBackward = dllToArrayBackward(dll);
+			arrayForward = listToArrayForward(list);
+			arrayBackward = listToArrayBackward(list);
 
 			deepEqual(arrayForward, expectedArrayForward, "content is equal");
 			deepEqual(arrayBackward, expectedArrayBackward, "content is equal");
@@ -68,13 +68,13 @@ test("DoublyLinkedList", function(){
 		n = 20;
 
 		for (; i <= n; ++i) {
-			dll.unshift(i);
+			list.unshift(i);
 			expectedArrayForward.unshift(i);
 			expectedArrayBackward.push(i);
-			deepEqual(dll.length, i, "length is " + i);
+			deepEqual(list.length, i, "length is " + i);
 
-			arrayForward = dllToArrayForward(dll);
-			arrayBackward = dllToArrayBackward(dll);
+			arrayForward = listToArrayForward(list);
+			arrayBackward = listToArrayBackward(list);
 
 			deepEqual(arrayForward, expectedArrayForward, "content is equal");
 			deepEqual(arrayBackward, expectedArrayBackward, "content is equal");
@@ -87,16 +87,16 @@ test("DoublyLinkedList", function(){
 		n = 10;
 
 		for (i = 20; i > n; --i) {
-			deepEqual(dll.length, i, "length is " + i);
+			deepEqual(list.length, i, "length is " + i);
 
-			v = dll.pop();
+			v = list.pop();
 			a = expectedArrayForward.pop();
 			b = expectedArrayBackward.shift();
 			deepEqual(v, a, "popped value a === " + a);
 			deepEqual(v, b, "popped value b === " + a);
 
-			arrayForward = dllToArrayForward(dll);
-			arrayBackward = dllToArrayBackward(dll);
+			arrayForward = listToArrayForward(list);
+			arrayBackward = listToArrayBackward(list);
 
 			deepEqual(arrayForward, expectedArrayForward, "content is equal");
 			deepEqual(arrayBackward, expectedArrayBackward, "content is equal");
@@ -105,16 +105,16 @@ test("DoublyLinkedList", function(){
 		n = 0;
 
 		for (; i > n; --i) {
-			deepEqual(dll.length, i, "length is " + i);
+			deepEqual(list.length, i, "length is " + i);
 
-			v = dll.shift();
+			v = list.shift();
 			a = expectedArrayForward.shift();
 			b = expectedArrayBackward.pop();
 			deepEqual(v, a, "shifted value a === " + a);
 			deepEqual(v, b, "shifted value b === " + a);
 
-			arrayForward = dllToArrayForward(dll);
-			arrayBackward = dllToArrayBackward(dll);
+			arrayForward = listToArrayForward(list);
+			arrayBackward = listToArrayBackward(list);
 
 			deepEqual(arrayForward, expectedArrayForward, "content is equal");
 			deepEqual(arrayBackward, expectedArrayBackward, "content is equal");
@@ -122,7 +122,7 @@ test("DoublyLinkedList", function(){
 	};
 
 	var clear = function(){
-		dll.clear();
+		list.clear();
 		expectedArrayForward.splice(0);
 		expectedArrayBackward.splice(0);
 	};
@@ -131,25 +131,25 @@ test("DoublyLinkedList", function(){
 	add20();
 	del20();
 
-	deepEqual(dll.length, 0, "length is 0");
+	deepEqual(list.length, 0, "length is 0");
 
-	v = dll.shift();
+	v = list.shift();
 	deepEqual(v, null, "v === null");
 
-	v = dll.pop();
+	v = list.pop();
 	deepEqual(v, null, "v === null");
 
-	deepEqual(dll.length, 0, "length is 0");
+	deepEqual(list.length, 0, "length is 0");
 
 	clear();
 	add20();
 
 	clear();
 
-	deepEqual(dll.length, 0, "length is 0");
+	deepEqual(list.length, 0, "length is 0");
 
-	arrayForward = dllToArrayForward(dll);
-	arrayBackward = dllToArrayBackward(dll);
+	arrayForward = listToArrayForward(list);
+	arrayBackward = listToArrayBackward(list);
 
 	deepEqual(arrayForward, expectedArrayForward, "content is equal");
 	deepEqual(arrayBackward, expectedArrayBackward, "content is equal");
@@ -157,18 +157,18 @@ test("DoublyLinkedList", function(){
 	clear();
 	add20();
 
-	first = dll.begin();
-	last = dll.end();
+	first = list.begin();
+	last = list.end();
 	first.next();
 
-	dll.eraserange(first, last);
+	list.eraserange(first, last);
 	expectedArrayForward.splice(0);
 	expectedArrayBackward.splice(0);
 
-	deepEqual(dll.length, 0, "length is 0");
+	deepEqual(list.length, 0, "length is 0");
 
-	arrayForward = dllToArrayForward(dll);
-	arrayBackward = dllToArrayBackward(dll);
+	arrayForward = listToArrayForward(list);
+	arrayBackward = listToArrayBackward(list);
 
 	deepEqual(arrayForward, expectedArrayForward, "content is equal");
 	deepEqual(arrayBackward, expectedArrayBackward, "content is equal");
@@ -176,18 +176,18 @@ test("DoublyLinkedList", function(){
 	clear();
 	add20();
 
-	first = dll.rbegin();
-	last = dll.rend();
+	first = list.rbegin();
+	last = list.rend();
 	first.next();
 
-	dll.reraserange(first, last);
+	list.reraserange(first, last);
 	expectedArrayForward.splice(0);
 	expectedArrayBackward.splice(0);
 
-	deepEqual(dll.length, 0, "length is 0");
+	deepEqual(list.length, 0, "length is 0");
 
-	arrayForward = dllToArrayForward(dll);
-	arrayBackward = dllToArrayBackward(dll);
+	arrayForward = listToArrayForward(list);
+	arrayBackward = listToArrayBackward(list);
 
 	deepEqual(arrayForward, expectedArrayForward, "content is equal");
 	deepEqual(arrayBackward, expectedArrayBackward, "content is equal");
@@ -198,23 +198,23 @@ test("DoublyLinkedList", function(){
 
 	m = 5;
 
-	first = dll.begin();
-	last = dll.end();
+	first = list.begin();
+	last = list.end();
 	first.next();
 	for (i = 0; i < m; ++i) {
 		first.next();
 		last.prev();
 	}
 
-	dll.eraserange(first, last);
+	list.eraserange(first, last);
 	expectedArrayForward.splice(m, n - m - m);
 	expectedArrayBackward.splice(m, n - m - m);
 
-	deepEqual(dll.length, expectedArrayForward.length, "length check");
-	deepEqual(dll.length, expectedArrayBackward.length, "length check");
+	deepEqual(list.length, expectedArrayForward.length, "length check");
+	deepEqual(list.length, expectedArrayBackward.length, "length check");
 
-	arrayForward = dllToArrayForward(dll);
-	arrayBackward = dllToArrayBackward(dll);
+	arrayForward = listToArrayForward(list);
+	arrayBackward = listToArrayBackward(list);
 
 	deepEqual(arrayForward, expectedArrayForward, "content is equal");
 	deepEqual(arrayBackward, expectedArrayBackward, "content is equal");
@@ -224,23 +224,23 @@ test("DoublyLinkedList", function(){
 
 	m = 5;
 
-	first = dll.rbegin();
-	last = dll.rend();
+	first = list.rbegin();
+	last = list.rend();
 	first.next();
 	for (i = 0; i < m; ++i) {
 		first.next();
 		last.prev();
 	}
 
-	dll.reraserange(first, last);
+	list.reraserange(first, last);
 	expectedArrayForward.splice(m, n - m - m);
 	expectedArrayBackward.splice(m, n - m - m);
 
-	deepEqual(dll.length, expectedArrayForward.length, "length check");
-	deepEqual(dll.length, expectedArrayBackward.length, "length check");
+	deepEqual(list.length, expectedArrayForward.length, "length check");
+	deepEqual(list.length, expectedArrayBackward.length, "length check");
 
-	arrayForward = dllToArrayForward(dll);
-	arrayBackward = dllToArrayBackward(dll);
+	arrayForward = listToArrayForward(list);
+	arrayBackward = listToArrayBackward(list);
 
 	deepEqual(arrayForward, expectedArrayForward, "content is equal");
 	deepEqual(arrayBackward, expectedArrayBackward, "content is equal");
