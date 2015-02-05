@@ -25,7 +25,8 @@
 	},
 	"author": "aureooms",
 	"devDependencies": {
-		"aureooms-node-package": "^2.0.2"
+		"aureooms-node-package": "^2.0.2",
+		"aureooms-js-list-spec": "^8.0.0"
 	},
 	"bugs": {
 		"url": "https://github.com/aureooms/js-dll/issues"
