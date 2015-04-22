@@ -1,5 +1,3 @@
-(function(){
-
 /**
  * Doubly linked list implementation
  * making use of dummy nodes for the
@@ -218,5 +216,3 @@ DoublyLinkedList.ReverseIterator = ReverseIterator;
 
 
 exports.DoublyLinkedList = DoublyLinkedList;
-
-})();

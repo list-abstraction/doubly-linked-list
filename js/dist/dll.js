@@ -4,8 +4,6 @@
 
 
 /* js/src/DoublyLinkedList.js */
-(function(){
-
 /**
  * Doubly linked list implementation
  * making use of dummy nodes for the
@@ -224,7 +222,5 @@ DoublyLinkedList.ReverseIterator = ReverseIterator;
 
 
 exports.DoublyLinkedList = DoublyLinkedList;
-
-})();
 
 })(typeof exports === 'undefined' ? this['dll'] = {} : exports);
