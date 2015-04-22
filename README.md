@@ -14,5 +14,6 @@ Doubly linked list code bricks for Javascript.
 [![Code Climate](http://img.shields.io/codeclimate/github/aureooms/js-dll.svg?style=flat)](https://codeclimate.com/github/aureooms/js-dll)
 [![NPM downloads per month](http://img.shields.io/npm/dm/aureooms-js-dll.svg?style=flat)](https://www.npmjs.org/package/aureooms-js-dll)
 [![GitHub issues](http://img.shields.io/github/issues/aureooms/js-dll.svg?style=flat)](https://github.com/aureooms/js-dll/issues)
+[![Inline docs](http://inch-ci.org/github/aureooms/js-dll.svg?branch=master&style=shields)](http://inch-ci.org/github/aureooms/js-dll)
 
 ***( forked from [js-data-structures](https://github.com/aureooms/js-data-structures) )***
