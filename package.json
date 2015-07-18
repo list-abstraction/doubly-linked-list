@@ -13,10 +13,14 @@
 		"data",
 		"dll",
 		"doubly linked list",
+		"doubly",
+		"linked",
 		"javascript",
 		"js",
 		"list",
-		"structures"
+		"structure",
+		"structures",
+		"ender"
 	],
 	"scripts": {
 		"build": "./node_modules/.bin/aureooms-node-package-build",
