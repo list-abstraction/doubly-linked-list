@@ -94,6 +94,9 @@ List ; <span class="hljs-comment">// new ( ) -&gt; List</span>
 <span class="hljs-comment">// number of elements in the list</span>
 list.length ; <span class="hljs-comment">// integer</span>
 
+<span class="hljs-comment">// returns iterator at the beginning of the list</span>
+List.prototype[<span class="hljs-built_in">Symbol</span>.iterator] ; <span class="hljs-comment">// ( ) -&gt; iterator</span>
+
 <span class="hljs-comment">// inserts value after iterator, returns new iterator</span>
 List.prototype.insertAfter ;      <span class="hljs-comment">// ( iterator , value ) -&gt; iterator</span>
 
