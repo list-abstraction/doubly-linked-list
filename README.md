@@ -137,6 +137,9 @@ List ; // new ( ) -> List
 // number of elements in the list
 list.length ; // integer
 
+// returns iterator at the beginning of the list
+List.prototype[Symbol.iterator] ; // ( ) -> iterator
+
 // inserts value after iterator, returns new iterator
 List.prototype.insertAfter ;      // ( iterator , value ) -> iterator
 
