@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head><title>index</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content=""><meta name="groc-document-path" content="index"><meta name="groc-project-path" content="README.md"><meta name="groc-github-url" content="https://github.com/aureooms/js-dll"><link rel="stylesheet" type="text/css" media="all" href="assets/style.css"><script type="text/javascript" src="assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/aureooms/js-dll/blob/master/README.md">README.md</a></div></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="-js-dll-http-aureooms-github-io-js-dll-"><a href="http://aureooms.github.io/js-dll">js-dll</a></h1>
-<p><a href="https://gitter.im/aureooms/js-dll?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/Join Chat.svg" alt="Gitter"></a></p>
-<p>Doubly linked list code bricks for Javascript.</p>
+<p>Doubly linked list code bricks for Javascript. Parent is
+<a href="https://github.com/aureooms/js-list-spec">aureooms/js-list-spec</a>.</p>
 <p><a href="https://raw.githubusercontent.com/aureooms/js-dll/master/LICENSE"><img src="http://img.shields.io/npm/l/aureooms-js-dll.svg?style=flat" alt="NPM license"></a>
 <a href="https://www.npmjs.org/package/aureooms-js-dll"><img src="http://img.shields.io/npm/v/aureooms-js-dll.svg?style=flat" alt="NPM version"></a>
 <a href="http://bower.io/search/?q=aureooms-js-dll"><img src="http://img.shields.io/bower/v/aureooms-js-dll.svg?style=flat" alt="Bower version"></a>
@@ -12,4 +12,144 @@
 <a href="https://www.npmjs.org/package/aureooms-js-dll"><img src="http://img.shields.io/npm/dm/aureooms-js-dll.svg?style=flat" alt="NPM downloads per month"></a>
 <a href="https://github.com/aureooms/js-dll/issues"><img src="http://img.shields.io/github/issues/aureooms/js-dll.svg?style=flat" alt="GitHub issues"></a>
 <a href="http://inch-ci.org/github/aureooms/js-dll"><img src="http://inch-ci.org/github/aureooms/js-dll.svg?branch=master&amp;style=shields" alt="Inline docs"></a></p>
-<p><strong><em>( forked from <a href="https://github.com/aureooms/js-data-structures">js-data-structures</a> )</em></strong></p></div></div></div></div></body></html>
+<p>Can be managed through <a href="https://github.com/jspm/jspm-cli">jspm</a>,
+<a href="https://github.com/duojs/duo">duo</a>,
+<a href="https://github.com/componentjs/component">component</a>,
+<a href="https://github.com/bower/bower">bower</a>,
+<a href="https://github.com/ender-js/Ender">ender</a>,
+<a href="https://github.com/caolan/jam">jam</a>,
+<a href="https://github.com/spmjs/spm">spm</a>,
+and <a href="https://github.com/npm/npm">npm</a>.</p>
+<h2 id="install">Install</h2>
+<h3 id="jspm">jspm</h3>
+<pre><code class="lang-terminal">jspm install github:aureooms/js-dll
+# or
+jspm install npm:aureooms-js-dll</code></pre>
+<h3 id="duo">duo</h3>
+<p>No install step needed for duo!</p>
+<h3 id="component">component</h3>
+<pre><code class="lang-terminal">component install aureooms/js-dll</code></pre>
+<h3 id="bower">bower</h3>
+<pre><code class="lang-terminal">bower install aureooms-js-dll</code></pre>
+<h3 id="ender">ender</h3>
+<pre><code class="lang-terminal">ender add aureooms-js-dll</code></pre>
+<h3 id="jam">jam</h3>
+<pre><code class="lang-terminal">jam install aureooms-js-dll</code></pre>
+<h3 id="spm">spm</h3>
+<pre><code class="lang-terminal">spm install aureooms-js-dll --save</code></pre>
+<h3 id="npm">npm</h3>
+<pre><code class="lang-terminal">npm install aureooms-js-dll --save</code></pre>
+<h2 id="require">Require</h2>
+<h3 id="jspm">jspm</h3>
+<pre><code class="lang-js"><span class="hljs-keyword">let</span> dll = <span class="hljs-built_in">require</span>( <span class="hljs-string">"github:aureooms/js-dll"</span> ) ;
+<span class="hljs-comment">// or</span>
+<span class="hljs-keyword">import</span> dll <span class="hljs-keyword">from</span> <span class="hljs-string">'aureooms-js-dll'</span> ;</code></pre>
+<h3 id="duo">duo</h3>
+<pre><code class="lang-js"><span class="hljs-keyword">let</span> dll = <span class="hljs-built_in">require</span>( <span class="hljs-string">"aureooms/js-dll"</span> ) ;</code></pre>
+<h3 id="component-ender-spm-npm">component, ender, spm, npm</h3>
+<pre><code class="lang-js"><span class="hljs-keyword">let</span> dll = <span class="hljs-built_in">require</span>( <span class="hljs-string">"aureooms-js-dll"</span> ) ;</code></pre>
+<h3 id="bower">bower</h3>
+<p>The script tag exposes the global variable <code>dll</code>.</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"bower_components/aureooms-js-dll/js/dist/dll.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span></code></pre>
+<p>Alternatively, you can use any tool mentioned <a href="http://bower.io/docs/tools/">here</a>.</p>
+<h3 id="jam">jam</h3>
+<pre><code class="lang-js"><span class="hljs-built_in">require</span>( [ <span class="hljs-string">"aureooms-js-dll"</span> ] , <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"> dll </span>) </span>{ ... } ) ;</code></pre>
+<h2 id="use">Use</h2>
+<pre><code class="lang-js"><span class="hljs-keyword">let</span> List = dll.DoublyLinkedList ;
+
+<span class="hljs-keyword">let</span> list = <span class="hljs-keyword">new</span> List( ) ;
+
+<span class="hljs-keyword">let</span> iterators = [ <span class="hljs-keyword">for</span> ( x <span class="hljs-keyword">of</span> [ <span class="hljs-number">0</span> , <span class="hljs-number">1</span> , <span class="hljs-number">2</span> ] ) list.push( x ) ] ;
+
+[ <span class="hljs-keyword">for</span> ( <span class="hljs-keyword">let</span> element <span class="hljs-keyword">of</span> list ) element ] ; <span class="hljs-comment">// [ 0 , 1 , 2 ]</span>
+
+list.erase( iterator[<span class="hljs-number">1</span>] ) ; <span class="hljs-comment">// removes `1` from the list</span>
+
+[ <span class="hljs-keyword">for</span> ( <span class="hljs-keyword">let</span> element <span class="hljs-keyword">of</span> list ) element ] ; <span class="hljs-comment">// [ 0 , 2 ]</span>
+
+<span class="hljs-comment">// note that other iterators remain valid</span>
+
+iterator[<span class="hljs-number">0</span>].current.value = <span class="hljs-number">0</span> ;
+iterator[<span class="hljs-number">2</span>].current.value = <span class="hljs-number">2</span> ;
+
+iterator[<span class="hljs-number">0</span>].next( ) ; <span class="hljs-comment">// { value : 2 , done : false }</span>
+iterator[<span class="hljs-number">0</span>].next( ) ; <span class="hljs-comment">// { done : true }</span>
+
+iterator[<span class="hljs-number">0</span>].prev( ) ; <span class="hljs-comment">// { value : 2 , done : false }</span>
+iterator[<span class="hljs-number">0</span>].prev( ) ; <span class="hljs-comment">// { value : 0 , done : false }</span>
+iterator[<span class="hljs-number">0</span>].prev( ) ; <span class="hljs-comment">// { done : true }</span>
+
+iterator[<span class="hljs-number">2</span>].prev( ) ; <span class="hljs-comment">// { value : 0 , done : false }</span>
+iterator[<span class="hljs-number">2</span>].prev( ) ; <span class="hljs-comment">// { done : true }</span>
+
+iterator[<span class="hljs-number">2</span>].next( ) ; <span class="hljs-comment">// { value : 0 , done : false }</span>
+iterator[<span class="hljs-number">2</span>].next( ) ; <span class="hljs-comment">// { value : 2 , done : false }</span>
+iterator[<span class="hljs-number">2</span>].next( ) ; <span class="hljs-comment">// { done : true }</span>
+
+<span class="hljs-comment">// SUPPORTED METHODS</span>
+
+<span class="hljs-comment">// Constructor</span>
+List ; <span class="hljs-comment">// new ( ) -&gt; List</span>
+
+<span class="hljs-comment">// number of elements in the list</span>
+list.length ; <span class="hljs-comment">// integer</span>
+
+<span class="hljs-comment">// inserts value after iterator, returns new iterator</span>
+List.prototype.insertAfter ;      <span class="hljs-comment">// ( iterator , value ) -&gt; iterator</span>
+
+<span class="hljs-comment">// inserts value before iterator, returns new iterator</span>
+List.prototype.insertBefore ;     <span class="hljs-comment">// ( iterator , value ) -&gt; iterator</span>
+
+<span class="hljs-comment">// inserts value at the beginning of the list, returns new iterator</span>
+List.prototype.unshift ;          <span class="hljs-comment">// ( value ) -&gt; iterator</span>
+
+<span class="hljs-comment">// inserts value at the end of the list, returns new iterator</span>
+List.prototype.push ;             <span class="hljs-comment">// ( value ) -&gt; iterator</span>
+
+<span class="hljs-comment">// erases iterator, returns next iterator</span>
+List.prototype.erase ;            <span class="hljs-comment">// ( iterator ) -&gt; iterator {next}</span>
+
+<span class="hljs-comment">// erases iterator, returns previous iterator</span>
+List.prototype.rerase ;           <span class="hljs-comment">// ( iterator ) -&gt; iterator {prev}</span>
+
+<span class="hljs-comment">// erases iterators in [first, last[, returns a copy of last</span>
+List.prototype.eraserange ;       <span class="hljs-comment">// ( first , last ) -&gt; iterator</span>
+
+<span class="hljs-comment">// erases iterator at the beginning of the list, returns associated value</span>
+List.prototype.shift ;            <span class="hljs-comment">// ( ) -&gt; value</span>
+
+<span class="hljs-comment">// erases iterator at the end of the list, returns associated value</span>
+List.prototype.pop ;              <span class="hljs-comment">// ( ) -&gt; value</span>
+
+<span class="hljs-comment">// erases the contents of the list</span>
+List.prototype.clear ;            <span class="hljs-comment">// ( ) -&gt; self</span>
+
+<span class="hljs-comment">// returns iterator at the beginning of the list</span>
+List.prototype.begin ;            <span class="hljs-comment">// ( ) -&gt; iterator</span>
+
+<span class="hljs-comment">// returns iterator at the end of the list</span>
+List.prototype.end ;              <span class="hljs-comment">// ( ) -&gt; iterator</span>
+
+<span class="hljs-comment">// returns reverse iterator at the end of the list</span>
+List.prototype.rbegin ;           <span class="hljs-comment">// ( ) -&gt; iterator</span>
+
+<span class="hljs-comment">// returns reverse iterator at the beginning of the list</span>
+List.prototype.rend ;             <span class="hljs-comment">// ( ) -&gt; iterator</span>
+
+<span class="hljs-comment">// returns a copy of self</span>
+Iterator.prototype.copy ;         <span class="hljs-comment">// ( ) -&gt; iterator</span>
+
+<span class="hljs-comment">// returns a copy of self</span>
+ReverseIterator.prototype.copy ;  <span class="hljs-comment">// ( ) -&gt; iterator</span>
+
+<span class="hljs-comment">// moves iterator one step forward, standard iterator protocol return object</span>
+Iterator.prototype.next ;         <span class="hljs-comment">// ( ) -&gt; { done , value }</span>
+
+<span class="hljs-comment">// moves iterator one step backward, standard iterator protocol return object</span>
+Iterator.prototype.prev ;         <span class="hljs-comment">// ( ) -&gt; { done , value }</span>
+
+<span class="hljs-comment">// moves iterator one step forward, standard iterator protocol return object</span>
+ReverseIterator.prototype.next ;  <span class="hljs-comment">// ( ) -&gt; { done , value }</span>
+
+<span class="hljs-comment">// moves iterator one step backward, standard iterator protocol return object</span>
+ReverseIterator.prototype.prev ;  <span class="hljs-comment">// ( ) -&gt; { done , value }</span></code></pre></div></div></div></div></body></html>
