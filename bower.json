@@ -3,7 +3,7 @@
 	"name": "aureooms-js-dll",
 	"license": "AGPL-3.0",
 	"description": "Doubly linked list code bricks for JavaScript",
-	"version": "6.0.8",
+	"version": "6.0.9",
 	"main": "js/dist/dll.js",
 	"ignore": [
 		"js/index.js",
