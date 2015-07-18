@@ -210,6 +210,7 @@ function(){
 	}
 };
 
+DoublyLinkedList.prototype[Symbol.iterator] = DoublyLinkedList.prototype.begin ;
 DoublyLinkedList.Node = Node;
 DoublyLinkedList.Iterator = Iterator;
 DoublyLinkedList.ReverseIterator = ReverseIterator;
