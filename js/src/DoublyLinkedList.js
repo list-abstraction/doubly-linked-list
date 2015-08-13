@@ -117,29 +117,35 @@ DoublyLinkedList.prototype.reraserange = function(first, last){
 	return last.copy();
 };
 
-DoublyLinkedList.prototype.shift = function(){
-	var it = this.begin();
-	var e = it.next();
+DoublyLinkedList.prototype.shift = function ( ) {
 
-	if (e.done) {
-		return null;
-	}
+	if ( this.length === 0 ) return null ;
 
-	this.rerase(it);
-	return e.value;
-};
+	const node = this.front.next ;
 
-DoublyLinkedList.prototype.pop = function(){
-	var it = this.rbegin();
-	var e = it.next();
+	this.front.next = node.next ;
+	node.next.prev = this.front ;
 
-	if (e.done) {
-		return null;
-	}
+	--this.length ;
 
-	this.erase(it);
-	return e.value;
-};
+	return node.value ;
+
+} ;
+
+DoublyLinkedList.prototype.pop = function ( ) {
+
+	if ( this.length === 0 ) return null ;
+
+	const node = this.back.prev ;
+
+	this.back.prev = node.prev ;
+	node.prev.next = this.back ;
+
+	--this.length ;
+
+	return node.value ;
+
+} ;
 
 DoublyLinkedList.prototype.clear = function(){
 	this.front.next = this.back;

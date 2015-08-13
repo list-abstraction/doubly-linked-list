@@ -127,27 +127,31 @@
 		};
 
 		DoublyLinkedList.prototype.shift = function () {
-			var it = this.begin();
-			var e = it.next();
 
-			if (e.done) {
-				return null;
-			}
+			if (this.length === 0) return null;
 
-			this.rerase(it);
-			return e.value;
+			var node = this.front.next;
+
+			this.front.next = node.next;
+			node.next.prev = this.front;
+
+			--this.length;
+
+			return node.value;
 		};
 
 		DoublyLinkedList.prototype.pop = function () {
-			var it = this.rbegin();
-			var e = it.next();
 
-			if (e.done) {
-				return null;
-			}
+			if (this.length === 0) return null;
 
-			this.erase(it);
-			return e.value;
+			var node = this.back.prev;
+
+			this.back.prev = node.prev;
+			node.prev.next = this.back;
+
+			--this.length;
+
+			return node.value;
 		};
 
 		DoublyLinkedList.prototype.clear = function () {
