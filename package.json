@@ -29,7 +29,7 @@
 	},
 	"author": "aureooms",
 	"devDependencies": {
-		"aureooms-node-package": "^4.2.5",
+		"aureooms-node-package": "^5.0.2",
 		"aureooms-js-list-spec": "^8.0.3"
 	},
 	"bugs": {
