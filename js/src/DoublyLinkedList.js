@@ -187,34 +187,22 @@ ReverseIterator.prototype.copy = function() {
 };
 
 Iterator.prototype.next =
-ReverseIterator.prototype.prev =
-function(){
-	this.current = this.current.next;
-	if (this.current === this.back) {
-		return { done : true };
-	}
-	else {
-		return {
-			value : this.current.value,
-			done : false
-		};
-	}
-};
+ReverseIterator.prototype.prev = function ( ) {
+
+	const c = this.current = this.current.next ;
+
+	return c === this.back ? { done : true } : { value : c.value , done : false } ;
+
+} ;
 
 Iterator.prototype.prev =
-ReverseIterator.prototype.next =
-function(){
-	this.current = this.current.prev;
-	if (this.current === this.front) {
-		return { done : true };
-	}
-	else {
-		return {
-			value : this.current.value,
-			done : false
-		};
-	}
-};
+ReverseIterator.prototype.next = function ( ) {
+
+	const c = this.current = this.current.prev ;
+
+	return c === this.front ? { done : true } : { value : c.value , done : false } ;
+
+} ;
 
 DoublyLinkedList.prototype[Symbol.iterator] = DoublyLinkedList.prototype.begin ;
 DoublyLinkedList.Node = Node;
