@@ -1,8 +1,15 @@
 [js-dll](http://aureooms.github.io/js-dll)
 ==
 
-Doubly linked list code bricks for Javascript. Parent is
-[aureooms/js-list-spec](https://github.com/aureooms/js-list-spec).
+Doubly linked list code bricks for Javascript.
+Implements the specification in
+[js-list-spec](https://github.com/aureooms/js-list-spec).
+Parent is
+[js-data-structures](https://github.com/aureooms/js-data-structures).
+
+```js
+for ( let value of list ) ... ;
+```
 
 [![NPM license](http://img.shields.io/npm/l/aureooms-js-dll.svg?style=flat)](https://raw.githubusercontent.com/aureooms/js-dll/master/LICENSE)
 [![NPM version](http://img.shields.io/npm/v/aureooms-js-dll.svg?style=flat)](https://www.npmjs.org/package/aureooms-js-dll)
