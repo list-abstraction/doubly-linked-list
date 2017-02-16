@@ -11,15 +11,15 @@ Parent is
 for ( let value of list ) ... ;
 ```
 
-[![NPM license](http://img.shields.io/npm/l/aureooms-js-dll.svg?style=flat)](https://raw.githubusercontent.com/aureooms/js-dll/master/LICENSE)
-[![NPM version](http://img.shields.io/npm/v/aureooms-js-dll.svg?style=flat)](https://www.npmjs.org/package/aureooms-js-dll)
-[![Bower version](http://img.shields.io/bower/v/aureooms-js-dll.svg?style=flat)](http://bower.io/search/?q=aureooms-js-dll)
+[![NPM license](http://img.shields.io/npm/l/@aureooms/js-dll.svg?style=flat)](https://raw.githubusercontent.com/aureooms/js-dll/master/LICENSE)
+[![NPM version](http://img.shields.io/npm/v/@aureooms/js-dll.svg?style=flat)](https://www.npmjs.org/package/@aureooms/js-dll)
+[![Bower version](http://img.shields.io/bower/v/@aureooms/js-dll.svg?style=flat)](http://bower.io/search/?q=@aureooms/js-dll)
 [![Build Status](http://img.shields.io/travis/aureooms/js-dll.svg?style=flat)](https://travis-ci.org/aureooms/js-dll)
 [![Coverage Status](http://img.shields.io/coveralls/aureooms/js-dll.svg?style=flat)](https://coveralls.io/r/aureooms/js-dll)
 [![Dependencies Status](http://img.shields.io/david/aureooms/js-dll.svg?style=flat)](https://david-dm.org/aureooms/js-dll#info=dependencies)
 [![devDependencies Status](http://img.shields.io/david/dev/aureooms/js-dll.svg?style=flat)](https://david-dm.org/aureooms/js-dll#info=devDependencies)
 [![Code Climate](http://img.shields.io/codeclimate/github/aureooms/js-dll.svg?style=flat)](https://codeclimate.com/github/aureooms/js-dll)
-[![NPM downloads per month](http://img.shields.io/npm/dm/aureooms-js-dll.svg?style=flat)](https://www.npmjs.org/package/aureooms-js-dll)
+[![NPM downloads per month](http://img.shields.io/npm/dm/@aureooms/js-dll.svg?style=flat)](https://www.npmjs.org/package/@aureooms/js-dll)
 [![GitHub issues](http://img.shields.io/github/issues/aureooms/js-dll.svg?style=flat)](https://github.com/aureooms/js-dll/issues)
 [![Inline docs](http://inch-ci.org/github/aureooms/js-dll.svg?branch=master&style=shields)](http://inch-ci.org/github/aureooms/js-dll)
 
@@ -38,7 +38,7 @@ and [npm](https://github.com/npm/npm).
 ```terminal
 jspm install github:aureooms/js-dll
 # or
-jspm install npm:aureooms-js-dll
+jspm install npm:@aureooms/js-dll
 ```
 ### duo
 No install step needed for duo!
@@ -50,27 +50,27 @@ component install aureooms/js-dll
 
 ### bower
 ```terminal
-bower install aureooms-js-dll
+bower install @aureooms/js-dll
 ```
 
 ### ender
 ```terminal
-ender add aureooms-js-dll
+ender add @aureooms/js-dll
 ```
 
 ### jam
 ```terminal
-jam install aureooms-js-dll
+jam install @aureooms/js-dll
 ```
 
 ### spm
 ```terminal
-spm install aureooms-js-dll --save
+spm install @aureooms/js-dll --save
 ```
 
 ### npm
 ```terminal
-npm install aureooms-js-dll --save
+npm install @aureooms/js-dll --save
 ```
 
 ## Require
@@ -78,7 +78,7 @@ npm install aureooms-js-dll --save
 ```js
 let dll = require( "github:aureooms/js-dll" ) ;
 // or
-import dll from 'aureooms-js-dll' ;
+import dll from '@aureooms/js-dll' ;
 ```
 ### duo
 ```js
@@ -87,19 +87,19 @@ let dll = require( "aureooms/js-dll" ) ;
 
 ### component, ender, spm, npm
 ```js
-let dll = require( "aureooms-js-dll" ) ;
+let dll = require( "@aureooms/js-dll" ) ;
 ```
 
 ### bower
 The script tag exposes the global variable `dll`.
 ```html
-<script src="bower_components/aureooms-js-dll/js/dist/dll.min.js"></script>
+<script src="bower_components/@aureooms/js-dll/js/dist/dll.min.js"></script>
 ```
 Alternatively, you can use any tool mentioned [here](http://bower.io/docs/tools/).
 
 ### jam
 ```js
-require( [ "aureooms-js-dll" ] , function ( dll ) { ... } ) ;
+require( [ "@aureooms/js-dll" ] , function ( dll ) { ... } ) ;
 ```
 
 ## Use
