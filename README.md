@@ -11,7 +11,7 @@ Parent is
 for ( let value of list ) ... ;
 ```
 
-[![NPM license](https://img.shields.io/npm/l/@aureooms/js-dll.svg?style=flat)](https://raw.githubusercontent.com/aureooms/js-dll/master/LICENSE)
+[![License](https://img.shields.io/github/license/aureooms/js-dll.svg?style=flat)](https://raw.githubusercontent.com/aureooms/js-dll/master/LICENSE)
 [![NPM version](https://img.shields.io/npm/v/@aureooms/js-dll.svg?style=flat)](https://www.npmjs.org/package/@aureooms/js-dll)
 [![Bower version](https://img.shields.io/bower/v/@aureooms/js-dll.svg?style=flat)](http://bower.io/search/?q=@aureooms/js-dll)
 [![Build Status](https://img.shields.io/travis/aureooms/js-dll.svg?style=flat)](https://travis-ci.org/aureooms/js-dll)
