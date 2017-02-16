@@ -1,5 +1,5 @@
 {
-	"name": "aureooms-js-dll",
+	"name": "@aureooms/js-dll",
 	"description": "Doubly linked list code bricks for JavaScript",
 	"homepage": "http://aureooms.github.io/js-dll/",
 	"main": "js/dist/dll.js",
@@ -30,7 +30,7 @@
 	"author": "aureooms",
 	"devDependencies": {
 		"aureooms-node-package": "^6.0.1",
-		"aureooms-js-list-spec": "^8.0.3"
+		"@aureooms/js-list-spec": "^8.0.3"
 	},
 	"bugs": {
 		"url": "https://github.com/aureooms/js-dll/issues"
