@@ -11,17 +11,20 @@ Parent is
 for ( let value of list ) ... ;
 ```
 
-[![License](https://img.shields.io/github/license/aureooms/js-dll.svg?style=flat)](https://raw.githubusercontent.com/aureooms/js-dll/master/LICENSE)
-[![NPM version](https://img.shields.io/npm/v/@aureooms/js-dll.svg?style=flat)](https://www.npmjs.org/package/@aureooms/js-dll)
-[![Bower version](https://img.shields.io/bower/v/@aureooms/js-dll.svg?style=flat)](http://bower.io/search/?q=@aureooms/js-dll)
-[![Build Status](https://img.shields.io/travis/aureooms/js-dll.svg?style=flat)](https://travis-ci.org/aureooms/js-dll)
-[![Coverage Status](https://img.shields.io/coveralls/aureooms/js-dll.svg?style=flat)](https://coveralls.io/r/aureooms/js-dll)
-[![Dependencies Status](https://img.shields.io/david/aureooms/js-dll.svg?style=flat)](https://david-dm.org/aureooms/js-dll#info=dependencies)
-[![devDependencies Status](https://img.shields.io/david/dev/aureooms/js-dll.svg?style=flat)](https://david-dm.org/aureooms/js-dll#info=devDependencies)
-[![Code Climate](https://img.shields.io/codeclimate/github/aureooms/js-dll.svg?style=flat)](https://codeclimate.com/github/aureooms/js-dll)
-[![NPM downloads per month](https://img.shields.io/npm/dm/@aureooms/js-dll.svg?style=flat)](https://www.npmjs.org/package/@aureooms/js-dll)
-[![GitHub issues](https://img.shields.io/github/issues/aureooms/js-dll.svg?style=flat)](https://github.com/aureooms/js-dll/issues)
-[![Inline docs](http://inch-ci.org/github/aureooms/js-dll.svg?branch=master&style=shields)](http://inch-ci.org/github/aureooms/js-dll)
+[![License](https://img.shields.io/github/license/aureooms/js-dll.svg)](https://raw.githubusercontent.com/aureooms/js-dll/master/LICENSE)
+[![Version](https://img.shields.io/npm/v/@aureooms/js-dll.svg)](https://www.npmjs.org/package/@aureooms/js-dll)
+[![Build](https://img.shields.io/travis/aureooms/js-dll/master.svg)](https://travis-ci.org/aureooms/js-dll/branches)
+[![Dependencies](https://img.shields.io/david/aureooms/js-dll.svg)](https://david-dm.org/aureooms/js-dll)
+[![Dev dependencies](https://img.shields.io/david/dev/aureooms/js-dll.svg)](https://david-dm.org/aureooms/js-dll?type=dev)
+[![GitHub issues](https://img.shields.io/github/issues/aureooms/js-dll.svg)](https://github.com/aureooms/js-dll/issues)
+[![Downloads](https://img.shields.io/npm/dm/@aureooms/js-dll.svg)](https://www.npmjs.org/package/@aureooms/js-dll)
+
+[![Code issues](https://img.shields.io/codeclimate/issues/aureooms/js-dll.svg)](https://codeclimate.com/github/aureooms/js-dll/issues)
+[![Code maintainability](https://img.shields.io/codeclimate/maintainability/aureooms/js-dll.svg)](https://codeclimate.com/github/aureooms/js-dll/trends/churn)
+[![Code coverage (cov)](https://img.shields.io/codecov/c/gh/aureooms/js-dll/master.svg)](https://codecov.io/gh/aureooms/js-dll)
+[![Code technical debt](https://img.shields.io/codeclimate/tech-debt/aureooms/js-dll.svg)](https://codeclimate.com/github/aureooms/js-dll/trends/technical_debt)
+[![Documentation](https://aureooms.github.io/js-dll//badge.svg)](https://aureooms.github.io/js-dll//source.html)
+[![Package size](https://img.shields.io/bundlephobia/minzip/@aureooms/js-dll)](https://bundlephobia.com/result?p=@aureooms/js-dll)
 
 Can be managed through [jspm](https://github.com/jspm/jspm-cli),
 [duo](https://github.com/duojs/duo),
