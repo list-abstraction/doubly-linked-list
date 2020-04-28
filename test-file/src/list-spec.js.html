@@ -2,8 +2,8 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <base data-ice="baseUrl">
-  <title data-ice="title">Home | @aureooms/js-dll</title>
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">src/list-spec.js | @aureooms/js-dll</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -37,27 +37,14 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="-a-href--https---aureooms-github-io-js-dll---aureooms-js-dll--a-"><a href="https://aureooms.github.io/js-dll">@aureooms/js-dll</a></h1><p>Doubly linked list code bricks for Javascript.
-Implements the specification in
-<a href="https://github.com/aureooms/js-list-spec">@aureooms/js-list-spec</a>.
-Parent is
-<a href="https://github.com/aureooms/js-data-structures">@aureooms/js-data-structures</a>.</p>
-<pre><code class="lang-js"><code class="source-code prettyprint">for ( let value of list ) ... ;</code>
+<div class="content" data-ice="content"><h1 data-ice="title">src/list-spec.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import test from &apos;ava&apos;;
+import * as dll from &apos;../../src&apos;;
+
+import * as spec from &quot;@aureooms/js-list-spec&quot; ;
+spec.test( test , &quot;DoublyLinkedList&quot; , dll.DoublyLinkedList ) ;
 </code></pre>
-<p><a href="https://raw.githubusercontent.com/aureooms/js-dll/master/LICENSE"><img src="https://img.shields.io/github/license/aureooms/js-dll.svg" alt="License"></a>
-<a href="https://www.npmjs.org/package/@aureooms/js-dll"><img src="https://img.shields.io/npm/v/@aureooms/js-dll.svg" alt="Version"></a>
-<a href="https://travis-ci.org/aureooms/js-dll/branches"><img src="https://img.shields.io/travis/aureooms/js-dll/master.svg" alt="Build"></a>
-<a href="https://david-dm.org/aureooms/js-dll"><img src="https://img.shields.io/david/aureooms/js-dll.svg" alt="Dependencies"></a>
-<a href="https://david-dm.org/aureooms/js-dll?type=dev"><img src="https://img.shields.io/david/dev/aureooms/js-dll.svg" alt="Dev dependencies"></a>
-<a href="https://github.com/aureooms/js-dll/issues"><img src="https://img.shields.io/github/issues/aureooms/js-dll.svg" alt="GitHub issues"></a>
-<a href="https://www.npmjs.org/package/@aureooms/js-dll"><img src="https://img.shields.io/npm/dm/@aureooms/js-dll.svg" alt="Downloads"></a></p>
-<p><a href="https://codeclimate.com/github/aureooms/js-dll/issues"><img src="https://img.shields.io/codeclimate/issues/aureooms/js-dll.svg" alt="Code issues"></a>
-<a href="https://codeclimate.com/github/aureooms/js-dll/trends/churn"><img src="https://img.shields.io/codeclimate/maintainability/aureooms/js-dll.svg" alt="Code maintainability"></a>
-<a href="https://codecov.io/gh/aureooms/js-dll"><img src="https://img.shields.io/codecov/c/gh/aureooms/js-dll/master.svg" alt="Code coverage (cov)"></a>
-<a href="https://codeclimate.com/github/aureooms/js-dll/trends/technical_debt"><img src="https://img.shields.io/codeclimate/tech-debt/aureooms/js-dll.svg" alt="Code technical debt"></a>
-<a href="https://aureooms.github.io/js-dll//source.html"><img src="https://aureooms.github.io/js-dll//badge.svg" alt="Documentation"></a>
-<a href="https://bundlephobia.com/result?p=@aureooms/js-dll"><img src="https://img.shields.io/bundlephobia/minzip/@aureooms/js-dll" alt="Package size"></a></p>
-</div>
+
 </div>
 
 <footer class="footer">
