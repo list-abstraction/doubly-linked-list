@@ -2,7 +2,7 @@
   "name": "@aureooms/js-dll",
   "description": "Doubly linked list code bricks for JavaScript",
   "homepage": "http://aureooms.github.io/js-dll/",
-  "main": "js/dist/dll.js",
+  "main": "lib/index.js",
   "version": "6.0.10",
   "repository": {
     "url": "https://github.com/aureooms/js-dll.git",
@@ -23,7 +23,7 @@
     "ender"
   ],
   "scripts": {
-    "build": "./node_modules/.bin/aureooms-node-package-build",
+    "build": "rm -rf lib && babel src -d lib",
     "test": "ava",
     "esdoc": "esdoc"
   },
