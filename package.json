@@ -1,7 +1,7 @@
 {
   "name": "@aureooms/js-dll",
   "description": "Doubly linked list code bricks for JavaScript",
-  "version": "6.0.10",
+  "version": "7.0.0",
   "author": "aureooms",
   "ava": {
     "files": [
