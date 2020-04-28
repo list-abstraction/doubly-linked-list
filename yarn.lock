@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@aureooms/js-list-spec@^8.0.3":
-  version "8.0.3"
-  resolved "https://registry.yarnpkg.com/@aureooms/js-list-spec/-/js-list-spec-8.0.3.tgz#9611fe1b108abd062f6e7426e2040732c026c445"
-  integrity sha1-lhH+GxCKvQYvbnQm4gQHMsAmxEU=
+"@aureooms/js-list-spec@^9.0.1":
+  version "9.0.1"
+  resolved "https://registry.yarnpkg.com/@aureooms/js-list-spec/-/js-list-spec-9.0.1.tgz#5cdc576826829f1eb6211c576a3a6495860e2dae"
+  integrity sha512-miwshRB11ZZTSa9xWHXonxdfO2DALAapG6e82P9V9SS+qhtNUB25JISWyf9S2rwXKUl2lT4sVAEQ4Lf7dbc8jg==
 
 "@babel/cli@7.8.4":
   version "7.8.4"
