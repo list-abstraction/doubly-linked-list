@@ -1,36 +1,35 @@
 {
   "name": "@aureooms/js-dll",
   "description": "Doubly linked list code bricks for JavaScript",
-  "homepage": "http://aureooms.github.io/js-dll/",
-  "main": "lib/index.js",
   "version": "6.0.10",
-  "repository": {
-    "url": "https://github.com/aureooms/js-dll.git",
-    "type": "git"
-  },
-  "keywords": [
-    "bricks",
-    "data",
-    "dll",
-    "doubly linked list",
-    "doubly",
-    "linked",
-    "javascript",
-    "js",
-    "list",
-    "structure",
-    "structures",
-    "ender"
-  ],
-  "scripts": {
-    "build": "rm -rf lib && babel src -d lib",
-    "test": "ava",
-    "esdoc": "esdoc",
-    "prepare": "npm run build",
-    "cover": "nyc --reporter=lcov npm test",
-    "release": "np"
-  },
   "author": "aureooms",
+  "ava": {
+    "files": [
+      "test/src/**/*"
+    ],
+    "require": [
+      "@babel/polyfill",
+      "@babel/register"
+    ],
+    "timeout": "1m"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-async-generator-functions"
+    ],
+    "env": {
+      "development": {
+        "sourceMaps": "inline"
+      }
+    }
+  },
+  "bugs": {
+    "url": "https://github.com/aureooms/js-dll/issues"
+  },
+  "dependencies": {},
   "devDependencies": {
     "@aureooms/js-list-spec": "^8.0.3",
     "@babel/cli": "7.8.4",
@@ -47,35 +46,36 @@
     "np": "6.2.3",
     "nyc": "15.0.1"
   },
-  "bugs": {
-    "url": "https://github.com/aureooms/js-dll/issues"
-  },
-  "dependencies": {},
-  "license": "AGPL-3.0",
-  "babel": {
-    "presets": [
-      "@babel/preset-env"
-    ],
-    "plugins": [
-      "@babel/plugin-proposal-async-generator-functions"
-    ],
-    "env": {
-      "development": {
-        "sourceMaps": "inline"
-      }
-    }
-  },
-  "ava": {
-    "files": [
-      "test/src/**/*"
-    ],
-    "require": [
-      "@babel/polyfill",
-      "@babel/register"
-    ],
-    "timeout": "1m"
-  },
   "files": [
     "lib"
-  ]
+  ],
+  "homepage": "http://aureooms.github.io/js-dll/",
+  "keywords": [
+    "bricks",
+    "data",
+    "dll",
+    "doubly",
+    "doubly linked list",
+    "ender",
+    "javascript",
+    "js",
+    "linked",
+    "list",
+    "structure",
+    "structures"
+  ],
+  "license": "AGPL-3.0",
+  "main": "lib/index.js",
+  "repository": {
+    "url": "https://github.com/aureooms/js-dll.git",
+    "type": "git"
+  },
+  "scripts": {
+    "build": "rm -rf lib && babel src -d lib",
+    "cover": "nyc --reporter=lcov npm test",
+    "esdoc": "esdoc",
+    "prepare": "npm run build",
+    "release": "np",
+    "test": "ava"
+  }
 }
