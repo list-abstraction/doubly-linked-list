@@ -1,3 +1,5 @@
+import test from 'ava';
+import * as dll from '../../src';
 
 test( "DoublyLinkedList" , function ( assert ) {
 
@@ -10,19 +12,19 @@ test( "DoublyLinkedList" , function ( assert ) {
 
 	assert.equal( list.length , 4 ) ;
 
-	assert.deepEqual( list.erase( b ) , c ) ;
+	assert.t.deepEqual( list.erase( b ) , c ) ;
 
 	assert.equal( list.length , 3 ) ;
 
-	assert.deepEqual( list.rerase( c ) , a ) ;
+	assert.t.deepEqual( list.rerase( c ) , a ) ;
 
 	assert.equal( list.length , 2 ) ;
 
-	assert.deepEqual( list.erase( a ) , d ) ;
+	assert.t.deepEqual( list.erase( a ) , d ) ;
 
 	assert.equal( list.length , 1 ) ;
 
-	assert.deepEqual( list.erase( d ) , list.end( ) ) ;
+	assert.t.deepEqual( list.erase( d ) , list.end( ) ) ;
 
 	assert.equal( list.length , 0 ) ;
 

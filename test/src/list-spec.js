@@ -1,4 +1,6 @@
+import test from 'ava';
+import * as dll from '../../src';
 
-var spec = require( "@aureooms/js-list-spec" ) ;
+import spec from "@aureooms/js-list-spec" ;
 spec.test( "DoublyLinkedList" , dll.DoublyLinkedList ) ;
 
