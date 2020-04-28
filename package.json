@@ -52,9 +52,6 @@
   },
   "dependencies": {},
   "license": "AGPL-3.0",
-  "spm": {
-    "main": "js/dist/dll.js"
-  },
   "babel": {
     "presets": [
       "@babel/preset-env"
