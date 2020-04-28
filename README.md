@@ -1,11 +1,11 @@
-[js-dll](http://aureooms.github.io/js-dll)
+[@aureooms/js-dll](https://aureooms.github.io/js-dll)
 ==
 
 Doubly linked list code bricks for Javascript.
 Implements the specification in
-[js-list-spec](https://github.com/aureooms/js-list-spec).
+[@aureooms/js-list-spec](https://github.com/aureooms/js-list-spec).
 Parent is
-[js-data-structures](https://github.com/aureooms/js-data-structures).
+[@aureooms/js-data-structures](https://github.com/aureooms/js-data-structures).
 
 ```js
 for ( let value of list ) ... ;
