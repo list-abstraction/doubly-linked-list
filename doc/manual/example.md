@@ -1,6 +1,6 @@
 # Examples
 
-> More examples in [the test files](https://github.com/aureooms/js-dll/tree/master/test/src).
+> More examples in [the test files](https://github.com/make-github-pseudonymous-again/js-dll/tree/master/test/src).
 
 ```js
 

@@ -27,7 +27,7 @@
     }
   },
   "bugs": {
-    "url": "https://github.com/aureooms/js-dll/issues"
+    "url": "https://github.com/make-github-pseudonymous-again/js-dll/issues"
   },
   "dependencies": {},
   "devDependencies": {
@@ -67,7 +67,7 @@
   "license": "AGPL-3.0",
   "main": "lib/index.js",
   "repository": {
-    "url": "https://github.com/aureooms/js-dll.git",
+    "url": "https://github.com/make-github-pseudonymous-again/js-dll.git",
     "type": "git"
   },
   "scripts": {
