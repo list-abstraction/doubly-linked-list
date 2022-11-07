@@ -5,14 +5,14 @@
 
 First, require the polyfill at the entry point of your application
 ```js
-require( 'regenerator-runtime/runtime' ) ;
+await import( 'regenerator-runtime/runtime.js' ) ;
 // or
 import 'regenerator-runtime/runtime.js' ;
 ```
 
 Then, import the library where needed
 ```js
-const dll = require( '@list-abstraction/doubly-linked-list' ) ;
+const dll = await import( '@list-abstraction/doubly-linked-list' ) ;
 // or
 import * as dll from '@list-abstraction/doubly-linked-list' ;
 ```
