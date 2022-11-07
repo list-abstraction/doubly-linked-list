@@ -1,5 +1,5 @@
 import test from 'ava';
-import * as dll from '../../src/index.js';
+import * as dll from '#module';
 
 test('DoublyLinkedList', (t) => {
 	const list = new dll.DoublyLinkedList();
