@@ -18,7 +18,7 @@ domReady(function () {
 
 	const testlink = document.querySelector('header > a[data-ice="testLink"]');
 	testlink.href =
-		'https://coveralls.io/github/list-abstraction/doubly-linked-list';
+		'https://app.codecov.io/gh/list-abstraction/doubly-linked-list';
 	testlink.target = '_BLANK';
 
 	const searchBox = document.querySelector('.search-box');
