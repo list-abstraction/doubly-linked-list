@@ -1,34 +1,62 @@
 {
-  "coverage": "4.34%",
-  "expectCount": 23,
+  "coverage": "3.7%",
+  "expectCount": 27,
   "actualCount": 1,
   "files": {
     "src/DoublyLinkedList.js": {
-      "expectCount": 23,
+      "expectCount": 19,
       "actualCount": 1,
       "undocumentLines": [
-        14,
-        20,
-        26,
-        32,
+        17,
+        28,
+        39,
         43,
-        54,
-        58,
-        62,
-        72,
-        82,
-        99,
-        116,
-        129,
+        47,
+        57,
+        67,
+        84,
+        101,
+        114,
+        127,
+        134,
+        138,
         142,
-        149,
-        153,
-        157,
-        161,
-        165,
-        169,
-        173,
-        177
+        146,
+        150,
+        154,
+        158
+      ]
+    },
+    "src/Iterator.js": {
+      "expectCount": 4,
+      "actualCount": 0,
+      "undocumentLines": [
+        1,
+        7,
+        11,
+        18
+      ]
+    },
+    "src/Node.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        1
+      ]
+    },
+    "src/ReverseIterator.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        3,
+        9
+      ]
+    },
+    "src/index.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        7
       ]
     }
   }

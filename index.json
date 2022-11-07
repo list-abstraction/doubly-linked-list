@@ -567,7 +567,7 @@
     "__docId__": 48,
     "kind": "file",
     "name": "src/DoublyLinkedList.js",
-    "content": "/**\n * Doubly linked list implementation\n * making use of dummy nodes for the\n * sake of simplicity.\n */\n\nexport function DoublyLinkedList() {\n\tthis.front = new Node(null, null, null);\n\tthis.back = new Node(this.front, null, null);\n\tthis.front.next = this.back;\n\tthis.length = 0;\n}\n\nexport function Node(prev, next, value) {\n\tthis.prev = prev;\n\tthis.next = next;\n\tthis.value = value;\n}\n\nexport function Iterator(front, back, current) {\n\tthis.front = front;\n\tthis.back = back;\n\tthis.current = current;\n}\n\nexport function ReverseIterator(front, back, current) {\n\tthis.front = front;\n\tthis.back = back;\n\tthis.current = current;\n}\n\nDoublyLinkedList.prototype.insertAfter = function (iterator, value) {\n\tconst prev = iterator.current;\n\n\tconst node = new Node(prev, prev.next, value);\n\tprev.next.prev = node;\n\tprev.next = node;\n\n\t++this.length;\n\treturn this.iterator(node);\n};\n\nDoublyLinkedList.prototype.insertBefore = function (iterator, value) {\n\tconst next = iterator.current;\n\n\tconst node = new Node(next.prev, next, value);\n\tnext.prev.next = node;\n\tnext.prev = node;\n\n\t++this.length;\n\treturn this.iterator(node);\n};\n\nDoublyLinkedList.prototype.unshift = function (value) {\n\treturn this.insertAfter(this.begin(), value);\n};\n\nDoublyLinkedList.prototype.push = function (value) {\n\treturn this.insertBefore(this.end(), value);\n};\n\nDoublyLinkedList.prototype.erase = function (iterator) {\n\tconst node = iterator.current;\n\n\tnode.prev.next = node.next;\n\tnode.next.prev = node.prev;\n\n\t--this.length;\n\treturn this.iterator(node.next);\n};\n\nDoublyLinkedList.prototype.rerase = function (iterator) {\n\tconst node = iterator.current;\n\n\tnode.next.prev = node.prev;\n\tnode.prev.next = node.next;\n\n\t--this.length;\n\treturn this.iterator(node.prev);\n};\n\nDoublyLinkedList.prototype.eraserange = function (first, last) {\n\tconst firstnode = first.current;\n\tconst lastnode = last.current;\n\n\tlastnode.prev = firstnode.prev;\n\tfirstnode.prev.next = lastnode;\n\n\tconst it = first.copy();\n\n\twhile (it.current !== lastnode) {\n\t\t--this.length;\n\t\tit.next();\n\t}\n\n\treturn last.copy();\n};\n\nDoublyLinkedList.prototype.reraserange = function (first, last) {\n\tconst firstnode = first.current;\n\tconst lastnode = last.current;\n\n\tlastnode.next = firstnode.next;\n\tfirstnode.next.prev = lastnode;\n\n\tconst it = first.copy();\n\n\twhile (it.current !== lastnode) {\n\t\t--this.length;\n\t\tit.next();\n\t}\n\n\treturn last.copy();\n};\n\nDoublyLinkedList.prototype.shift = function () {\n\tif (this.length === 0) return null;\n\n\tconst node = this.front.next;\n\n\tthis.front.next = node.next;\n\tnode.next.prev = this.front;\n\n\t--this.length;\n\n\treturn node.value;\n};\n\nDoublyLinkedList.prototype.pop = function () {\n\tif (this.length === 0) return null;\n\n\tconst node = this.back.prev;\n\n\tthis.back.prev = node.prev;\n\tnode.prev.next = this.back;\n\n\t--this.length;\n\n\treturn node.value;\n};\n\nDoublyLinkedList.prototype.clear = function () {\n\tthis.front.next = this.back;\n\tthis.back.prev = this.front;\n\tthis.length = 0;\n\treturn this;\n};\n\nDoublyLinkedList.prototype.iterator = function (node) {\n\treturn new Iterator(this.front, this.back, node);\n};\n\nDoublyLinkedList.prototype.riterator = function (node) {\n\treturn new ReverseIterator(this.front, this.back, node);\n};\n\nDoublyLinkedList.prototype.begin = function () {\n\treturn this.iterator(this.front);\n};\n\nDoublyLinkedList.prototype.end = function () {\n\treturn this.iterator(this.back);\n};\n\nDoublyLinkedList.prototype.rbegin = function () {\n\treturn this.riterator(this.back);\n};\n\nDoublyLinkedList.prototype.rend = function () {\n\treturn this.riterator(this.front);\n};\n\nIterator.prototype.copy = function () {\n\treturn new Iterator(this.front, this.back, this.current);\n};\n\nReverseIterator.prototype.copy = function () {\n\treturn new ReverseIterator(this.front, this.back, this.current);\n};\n\n// eslint-disable-next-line no-multi-assign\nIterator.prototype.next = ReverseIterator.prototype.prev = function () {\n\t// eslint-disable-next-line no-multi-assign\n\tconst c = (this.current = this.current.next);\n\n\treturn c === this.back ? {done: true} : {value: c.value, done: false};\n};\n\n// eslint-disable-next-line no-multi-assign\nIterator.prototype.prev = ReverseIterator.prototype.next = function () {\n\t// eslint-disable-next-line no-multi-assign\n\tconst c = (this.current = this.current.prev);\n\n\treturn c === this.front ? {done: true} : {value: c.value, done: false};\n};\n\nDoublyLinkedList.prototype[Symbol.iterator] = DoublyLinkedList.prototype.begin;\nDoublyLinkedList.Node = Node;\nDoublyLinkedList.Iterator = Iterator;\nDoublyLinkedList.ReverseIterator = ReverseIterator;\n",
+    "content": "import Node from './Node.js';\nimport Iterator from './Iterator.js';\nimport ReverseIterator from './ReverseIterator.js';\n\n/**\n * Doubly linked list implementation\n * making use of dummy nodes for the\n * sake of simplicity.\n */\nexport default function DoublyLinkedList() {\n\tthis.front = new Node(null, null, null);\n\tthis.back = new Node(this.front, null, null);\n\tthis.front.next = this.back;\n\tthis.length = 0;\n}\n\nDoublyLinkedList.prototype.insertAfter = function (iterator, value) {\n\tconst prev = iterator.current;\n\n\tconst node = new Node(prev, prev.next, value);\n\tprev.next.prev = node;\n\tprev.next = node;\n\n\t++this.length;\n\treturn this.iterator(node);\n};\n\nDoublyLinkedList.prototype.insertBefore = function (iterator, value) {\n\tconst next = iterator.current;\n\n\tconst node = new Node(next.prev, next, value);\n\tnext.prev.next = node;\n\tnext.prev = node;\n\n\t++this.length;\n\treturn this.iterator(node);\n};\n\nDoublyLinkedList.prototype.unshift = function (value) {\n\treturn this.insertAfter(this.begin(), value);\n};\n\nDoublyLinkedList.prototype.push = function (value) {\n\treturn this.insertBefore(this.end(), value);\n};\n\nDoublyLinkedList.prototype.erase = function (iterator) {\n\tconst node = iterator.current;\n\n\tnode.prev.next = node.next;\n\tnode.next.prev = node.prev;\n\n\t--this.length;\n\treturn this.iterator(node.next);\n};\n\nDoublyLinkedList.prototype.rerase = function (iterator) {\n\tconst node = iterator.current;\n\n\tnode.next.prev = node.prev;\n\tnode.prev.next = node.next;\n\n\t--this.length;\n\treturn this.iterator(node.prev);\n};\n\nDoublyLinkedList.prototype.eraserange = function (first, last) {\n\tconst firstnode = first.current;\n\tconst lastnode = last.current;\n\n\tlastnode.prev = firstnode.prev;\n\tfirstnode.prev.next = lastnode;\n\n\tconst it = first.copy();\n\n\twhile (it.current !== lastnode) {\n\t\t--this.length;\n\t\tit.next();\n\t}\n\n\treturn last.copy();\n};\n\nDoublyLinkedList.prototype.reraserange = function (first, last) {\n\tconst firstnode = first.current;\n\tconst lastnode = last.current;\n\n\tlastnode.next = firstnode.next;\n\tfirstnode.next.prev = lastnode;\n\n\tconst it = first.copy();\n\n\twhile (it.current !== lastnode) {\n\t\t--this.length;\n\t\tit.next();\n\t}\n\n\treturn last.copy();\n};\n\nDoublyLinkedList.prototype.shift = function () {\n\tif (this.length === 0) return null;\n\n\tconst node = this.front.next;\n\n\tthis.front.next = node.next;\n\tnode.next.prev = this.front;\n\n\t--this.length;\n\n\treturn node.value;\n};\n\nDoublyLinkedList.prototype.pop = function () {\n\tif (this.length === 0) return null;\n\n\tconst node = this.back.prev;\n\n\tthis.back.prev = node.prev;\n\tnode.prev.next = this.back;\n\n\t--this.length;\n\n\treturn node.value;\n};\n\nDoublyLinkedList.prototype.clear = function () {\n\tthis.front.next = this.back;\n\tthis.back.prev = this.front;\n\tthis.length = 0;\n\treturn this;\n};\n\nDoublyLinkedList.prototype.iterator = function (node) {\n\treturn new Iterator(this.front, this.back, node);\n};\n\nDoublyLinkedList.prototype.riterator = function (node) {\n\treturn new ReverseIterator(this.front, this.back, node);\n};\n\nDoublyLinkedList.prototype.begin = function () {\n\treturn this.iterator(this.front);\n};\n\nDoublyLinkedList.prototype.end = function () {\n\treturn this.iterator(this.back);\n};\n\nDoublyLinkedList.prototype.rbegin = function () {\n\treturn this.riterator(this.back);\n};\n\nDoublyLinkedList.prototype.rend = function () {\n\treturn this.riterator(this.front);\n};\n\nconst from = (iterable) => {\n\tconst list = new DoublyLinkedList();\n\tfor (const value of iterable) list.push(value);\n\treturn list;\n};\n\nDoublyLinkedList.prototype[Symbol.iterator] = DoublyLinkedList.prototype.begin;\nDoublyLinkedList.Node = Node;\nDoublyLinkedList.Iterator = Iterator;\nDoublyLinkedList.ReverseIterator = ReverseIterator;\nDoublyLinkedList.from = from;\n",
     "static": true,
     "longname": "/home/runner/work/doubly-linked-list/doubly-linked-list/src/DoublyLinkedList.js",
     "access": "public",
@@ -586,27 +586,692 @@
     "access": "public",
     "export": true,
     "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
-    "importStyle": "{DoublyLinkedList}",
+    "importStyle": "DoublyLinkedList",
     "description": "Doubly linked list implementation\nmaking use of dummy nodes for the\nsake of simplicity.",
-    "lineNumber": 7,
+    "lineNumber": 10,
     "params": [],
     "return": null
   },
   {
     "__docId__": 50,
     "kind": "function",
-    "name": "Node",
+    "name": "insertAfter",
     "memberof": "src/DoublyLinkedList.js",
     "generator": false,
     "async": false,
     "static": true,
-    "longname": "src/DoublyLinkedList.js~Node",
+    "longname": "src/DoublyLinkedList.js~insertAfter",
+    "access": "public",
+    "export": false,
+    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 17,
+    "undocument": true,
+    "params": [
+      {
+        "name": "iterator",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "value",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 51,
+    "kind": "function",
+    "name": "insertBefore",
+    "memberof": "src/DoublyLinkedList.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/DoublyLinkedList.js~insertBefore",
+    "access": "public",
+    "export": false,
+    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 28,
+    "undocument": true,
+    "params": [
+      {
+        "name": "iterator",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "value",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 52,
+    "kind": "function",
+    "name": "unshift",
+    "memberof": "src/DoublyLinkedList.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/DoublyLinkedList.js~unshift",
+    "access": "public",
+    "export": false,
+    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 39,
+    "undocument": true,
+    "params": [
+      {
+        "name": "value",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 53,
+    "kind": "function",
+    "name": "push",
+    "memberof": "src/DoublyLinkedList.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/DoublyLinkedList.js~push",
+    "access": "public",
+    "export": false,
+    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 43,
+    "undocument": true,
+    "params": [
+      {
+        "name": "value",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 54,
+    "kind": "function",
+    "name": "erase",
+    "memberof": "src/DoublyLinkedList.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/DoublyLinkedList.js~erase",
+    "access": "public",
+    "export": false,
+    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 47,
+    "undocument": true,
+    "params": [
+      {
+        "name": "iterator",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 55,
+    "kind": "function",
+    "name": "rerase",
+    "memberof": "src/DoublyLinkedList.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/DoublyLinkedList.js~rerase",
+    "access": "public",
+    "export": false,
+    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 57,
+    "undocument": true,
+    "params": [
+      {
+        "name": "iterator",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 56,
+    "kind": "function",
+    "name": "eraserange",
+    "memberof": "src/DoublyLinkedList.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/DoublyLinkedList.js~eraserange",
+    "access": "public",
+    "export": false,
+    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 67,
+    "undocument": true,
+    "params": [
+      {
+        "name": "first",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "last",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 57,
+    "kind": "function",
+    "name": "reraserange",
+    "memberof": "src/DoublyLinkedList.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/DoublyLinkedList.js~reraserange",
+    "access": "public",
+    "export": false,
+    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 84,
+    "undocument": true,
+    "params": [
+      {
+        "name": "first",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "last",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 58,
+    "kind": "function",
+    "name": "shift",
+    "memberof": "src/DoublyLinkedList.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/DoublyLinkedList.js~shift",
+    "access": "public",
+    "export": false,
+    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 101,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 59,
+    "kind": "function",
+    "name": "pop",
+    "memberof": "src/DoublyLinkedList.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/DoublyLinkedList.js~pop",
+    "access": "public",
+    "export": false,
+    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 114,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 60,
+    "kind": "function",
+    "name": "clear",
+    "memberof": "src/DoublyLinkedList.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/DoublyLinkedList.js~clear",
+    "access": "public",
+    "export": false,
+    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 127,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 61,
+    "kind": "function",
+    "name": "iterator",
+    "memberof": "src/DoublyLinkedList.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/DoublyLinkedList.js~iterator",
+    "access": "public",
+    "export": false,
+    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 134,
+    "undocument": true,
+    "params": [
+      {
+        "name": "node",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 62,
+    "kind": "function",
+    "name": "riterator",
+    "memberof": "src/DoublyLinkedList.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/DoublyLinkedList.js~riterator",
+    "access": "public",
+    "export": false,
+    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 138,
+    "undocument": true,
+    "params": [
+      {
+        "name": "node",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 63,
+    "kind": "function",
+    "name": "begin",
+    "memberof": "src/DoublyLinkedList.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/DoublyLinkedList.js~begin",
+    "access": "public",
+    "export": false,
+    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 142,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 64,
+    "kind": "function",
+    "name": "end",
+    "memberof": "src/DoublyLinkedList.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/DoublyLinkedList.js~end",
+    "access": "public",
+    "export": false,
+    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 146,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 65,
+    "kind": "function",
+    "name": "rbegin",
+    "memberof": "src/DoublyLinkedList.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/DoublyLinkedList.js~rbegin",
+    "access": "public",
+    "export": false,
+    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 150,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 66,
+    "kind": "function",
+    "name": "rend",
+    "memberof": "src/DoublyLinkedList.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/DoublyLinkedList.js~rend",
+    "access": "public",
+    "export": false,
+    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 154,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 67,
+    "kind": "function",
+    "name": "from",
+    "memberof": "src/DoublyLinkedList.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/DoublyLinkedList.js~from",
+    "access": "public",
+    "export": false,
+    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 158,
+    "undocument": true,
+    "params": [
+      {
+        "name": "iterable",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 68,
+    "kind": "file",
+    "name": "src/Iterator.js",
+    "content": "export default function Iterator(front, back, current) {\n\tthis.front = front;\n\tthis.back = back;\n\tthis.current = current;\n}\n\nIterator.prototype.copy = function () {\n\treturn new Iterator(this.front, this.back, this.current);\n};\n\nIterator.prototype.next = function () {\n\t// eslint-disable-next-line no-multi-assign\n\tconst c = (this.current = this.current.next);\n\n\treturn c === this.back ? {done: true} : {value: c.value, done: false};\n};\n\nIterator.prototype.prev = function () {\n\t// eslint-disable-next-line no-multi-assign\n\tconst c = (this.current = this.current.prev);\n\n\treturn c === this.front ? {done: true} : {value: c.value, done: false};\n};\n",
+    "static": true,
+    "longname": "/home/runner/work/doubly-linked-list/doubly-linked-list/src/Iterator.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 69,
+    "kind": "function",
+    "name": "Iterator",
+    "memberof": "src/Iterator.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/Iterator.js~Iterator",
     "access": "public",
     "export": true,
-    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
-    "importStyle": "{Node}",
+    "importPath": "@list-abstraction/doubly-linked-list/src/Iterator.js",
+    "importStyle": "Iterator",
     "description": null,
-    "lineNumber": 14,
+    "lineNumber": 1,
+    "undocument": true,
+    "params": [
+      {
+        "name": "front",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "back",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "current",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 70,
+    "kind": "function",
+    "name": "copy",
+    "memberof": "src/Iterator.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/Iterator.js~copy",
+    "access": "public",
+    "export": false,
+    "importPath": "@list-abstraction/doubly-linked-list/src/Iterator.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 7,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 71,
+    "kind": "function",
+    "name": "next",
+    "memberof": "src/Iterator.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/Iterator.js~next",
+    "access": "public",
+    "export": false,
+    "importPath": "@list-abstraction/doubly-linked-list/src/Iterator.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 11,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 72,
+    "kind": "function",
+    "name": "prev",
+    "memberof": "src/Iterator.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/Iterator.js~prev",
+    "access": "public",
+    "export": false,
+    "importPath": "@list-abstraction/doubly-linked-list/src/Iterator.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 18,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 73,
+    "kind": "file",
+    "name": "src/Node.js",
+    "content": "export default function Node(prev, next, value) {\n\tthis.prev = prev;\n\tthis.next = next;\n\tthis.value = value;\n}\n",
+    "static": true,
+    "longname": "/home/runner/work/doubly-linked-list/doubly-linked-list/src/Node.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 74,
+    "kind": "function",
+    "name": "Node",
+    "memberof": "src/Node.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/Node.js~Node",
+    "access": "public",
+    "export": true,
+    "importPath": "@list-abstraction/doubly-linked-list/src/Node.js",
+    "importStyle": "Node",
+    "description": null,
+    "lineNumber": 1,
     "undocument": true,
     "params": [
       {
@@ -631,58 +1296,31 @@
     "return": null
   },
   {
-    "__docId__": 51,
-    "kind": "function",
-    "name": "Iterator",
-    "memberof": "src/DoublyLinkedList.js",
-    "generator": false,
-    "async": false,
+    "__docId__": 75,
+    "kind": "file",
+    "name": "src/ReverseIterator.js",
+    "content": "import Iterator from './Iterator.js';\n\nexport default function ReverseIterator(front, back, current) {\n\tthis.front = front;\n\tthis.back = back;\n\tthis.current = current;\n}\n\nReverseIterator.prototype.copy = function () {\n\treturn new ReverseIterator(this.front, this.back, this.current);\n};\n\nReverseIterator.prototype.prev = Iterator.prototype.next;\nReverseIterator.prototype.next = Iterator.prototype.prev;\n",
     "static": true,
-    "longname": "src/DoublyLinkedList.js~Iterator",
+    "longname": "/home/runner/work/doubly-linked-list/doubly-linked-list/src/ReverseIterator.js",
     "access": "public",
-    "export": true,
-    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
-    "importStyle": "{Iterator}",
     "description": null,
-    "lineNumber": 20,
-    "undocument": true,
-    "params": [
-      {
-        "name": "front",
-        "types": [
-          "*"
-        ]
-      },
-      {
-        "name": "back",
-        "types": [
-          "*"
-        ]
-      },
-      {
-        "name": "current",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": null
+    "lineNumber": 1
   },
   {
-    "__docId__": 52,
+    "__docId__": 76,
     "kind": "function",
     "name": "ReverseIterator",
-    "memberof": "src/DoublyLinkedList.js",
+    "memberof": "src/ReverseIterator.js",
     "generator": false,
     "async": false,
     "static": true,
-    "longname": "src/DoublyLinkedList.js~ReverseIterator",
+    "longname": "src/ReverseIterator.js~ReverseIterator",
     "access": "public",
     "export": true,
-    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
-    "importStyle": "{ReverseIterator}",
+    "importPath": "@list-abstraction/doubly-linked-list/src/ReverseIterator.js",
+    "importStyle": "ReverseIterator",
     "description": null,
-    "lineNumber": 26,
+    "lineNumber": 3,
     "undocument": true,
     "params": [
       {
@@ -707,522 +1345,20 @@
     "return": null
   },
   {
-    "__docId__": 53,
-    "kind": "function",
-    "name": "insertAfter",
-    "memberof": "src/DoublyLinkedList.js",
-    "generator": false,
-    "async": false,
-    "static": true,
-    "longname": "src/DoublyLinkedList.js~insertAfter",
-    "access": "public",
-    "export": false,
-    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 32,
-    "undocument": true,
-    "params": [
-      {
-        "name": "iterator",
-        "types": [
-          "*"
-        ]
-      },
-      {
-        "name": "value",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": {
-      "types": [
-        "*"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 54,
-    "kind": "function",
-    "name": "insertBefore",
-    "memberof": "src/DoublyLinkedList.js",
-    "generator": false,
-    "async": false,
-    "static": true,
-    "longname": "src/DoublyLinkedList.js~insertBefore",
-    "access": "public",
-    "export": false,
-    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 43,
-    "undocument": true,
-    "params": [
-      {
-        "name": "iterator",
-        "types": [
-          "*"
-        ]
-      },
-      {
-        "name": "value",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": {
-      "types": [
-        "*"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 55,
-    "kind": "function",
-    "name": "unshift",
-    "memberof": "src/DoublyLinkedList.js",
-    "generator": false,
-    "async": false,
-    "static": true,
-    "longname": "src/DoublyLinkedList.js~unshift",
-    "access": "public",
-    "export": false,
-    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 54,
-    "undocument": true,
-    "params": [
-      {
-        "name": "value",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": {
-      "types": [
-        "*"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 56,
-    "kind": "function",
-    "name": "push",
-    "memberof": "src/DoublyLinkedList.js",
-    "generator": false,
-    "async": false,
-    "static": true,
-    "longname": "src/DoublyLinkedList.js~push",
-    "access": "public",
-    "export": false,
-    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 58,
-    "undocument": true,
-    "params": [
-      {
-        "name": "value",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": {
-      "types": [
-        "*"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 57,
-    "kind": "function",
-    "name": "erase",
-    "memberof": "src/DoublyLinkedList.js",
-    "generator": false,
-    "async": false,
-    "static": true,
-    "longname": "src/DoublyLinkedList.js~erase",
-    "access": "public",
-    "export": false,
-    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 62,
-    "undocument": true,
-    "params": [
-      {
-        "name": "iterator",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": {
-      "types": [
-        "*"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 58,
-    "kind": "function",
-    "name": "rerase",
-    "memberof": "src/DoublyLinkedList.js",
-    "generator": false,
-    "async": false,
-    "static": true,
-    "longname": "src/DoublyLinkedList.js~rerase",
-    "access": "public",
-    "export": false,
-    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 72,
-    "undocument": true,
-    "params": [
-      {
-        "name": "iterator",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": {
-      "types": [
-        "*"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 59,
-    "kind": "function",
-    "name": "eraserange",
-    "memberof": "src/DoublyLinkedList.js",
-    "generator": false,
-    "async": false,
-    "static": true,
-    "longname": "src/DoublyLinkedList.js~eraserange",
-    "access": "public",
-    "export": false,
-    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 82,
-    "undocument": true,
-    "params": [
-      {
-        "name": "first",
-        "types": [
-          "*"
-        ]
-      },
-      {
-        "name": "last",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": {
-      "types": [
-        "*"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 60,
-    "kind": "function",
-    "name": "reraserange",
-    "memberof": "src/DoublyLinkedList.js",
-    "generator": false,
-    "async": false,
-    "static": true,
-    "longname": "src/DoublyLinkedList.js~reraserange",
-    "access": "public",
-    "export": false,
-    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 99,
-    "undocument": true,
-    "params": [
-      {
-        "name": "first",
-        "types": [
-          "*"
-        ]
-      },
-      {
-        "name": "last",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": {
-      "types": [
-        "*"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 61,
-    "kind": "function",
-    "name": "shift",
-    "memberof": "src/DoublyLinkedList.js",
-    "generator": false,
-    "async": false,
-    "static": true,
-    "longname": "src/DoublyLinkedList.js~shift",
-    "access": "public",
-    "export": false,
-    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 116,
-    "undocument": true,
-    "params": [],
-    "return": {
-      "types": [
-        "*"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 62,
-    "kind": "function",
-    "name": "pop",
-    "memberof": "src/DoublyLinkedList.js",
-    "generator": false,
-    "async": false,
-    "static": true,
-    "longname": "src/DoublyLinkedList.js~pop",
-    "access": "public",
-    "export": false,
-    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 129,
-    "undocument": true,
-    "params": [],
-    "return": {
-      "types": [
-        "*"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 63,
-    "kind": "function",
-    "name": "clear",
-    "memberof": "src/DoublyLinkedList.js",
-    "generator": false,
-    "async": false,
-    "static": true,
-    "longname": "src/DoublyLinkedList.js~clear",
-    "access": "public",
-    "export": false,
-    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 142,
-    "undocument": true,
-    "params": [],
-    "return": {
-      "types": [
-        "*"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 64,
-    "kind": "function",
-    "name": "iterator",
-    "memberof": "src/DoublyLinkedList.js",
-    "generator": false,
-    "async": false,
-    "static": true,
-    "longname": "src/DoublyLinkedList.js~iterator",
-    "access": "public",
-    "export": false,
-    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 149,
-    "undocument": true,
-    "params": [
-      {
-        "name": "node",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": {
-      "types": [
-        "*"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 65,
-    "kind": "function",
-    "name": "riterator",
-    "memberof": "src/DoublyLinkedList.js",
-    "generator": false,
-    "async": false,
-    "static": true,
-    "longname": "src/DoublyLinkedList.js~riterator",
-    "access": "public",
-    "export": false,
-    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 153,
-    "undocument": true,
-    "params": [
-      {
-        "name": "node",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": {
-      "types": [
-        "*"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 66,
-    "kind": "function",
-    "name": "begin",
-    "memberof": "src/DoublyLinkedList.js",
-    "generator": false,
-    "async": false,
-    "static": true,
-    "longname": "src/DoublyLinkedList.js~begin",
-    "access": "public",
-    "export": false,
-    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 157,
-    "undocument": true,
-    "params": [],
-    "return": {
-      "types": [
-        "*"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 67,
-    "kind": "function",
-    "name": "end",
-    "memberof": "src/DoublyLinkedList.js",
-    "generator": false,
-    "async": false,
-    "static": true,
-    "longname": "src/DoublyLinkedList.js~end",
-    "access": "public",
-    "export": false,
-    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 161,
-    "undocument": true,
-    "params": [],
-    "return": {
-      "types": [
-        "*"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 68,
-    "kind": "function",
-    "name": "rbegin",
-    "memberof": "src/DoublyLinkedList.js",
-    "generator": false,
-    "async": false,
-    "static": true,
-    "longname": "src/DoublyLinkedList.js~rbegin",
-    "access": "public",
-    "export": false,
-    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 165,
-    "undocument": true,
-    "params": [],
-    "return": {
-      "types": [
-        "*"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 69,
-    "kind": "function",
-    "name": "rend",
-    "memberof": "src/DoublyLinkedList.js",
-    "generator": false,
-    "async": false,
-    "static": true,
-    "longname": "src/DoublyLinkedList.js~rend",
-    "access": "public",
-    "export": false,
-    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 169,
-    "undocument": true,
-    "params": [],
-    "return": {
-      "types": [
-        "*"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 70,
+    "__docId__": 77,
     "kind": "function",
     "name": "copy",
-    "memberof": "src/DoublyLinkedList.js",
+    "memberof": "src/ReverseIterator.js",
     "generator": false,
     "async": false,
     "static": true,
-    "longname": "src/DoublyLinkedList.js~copy",
+    "longname": "src/ReverseIterator.js~copy",
     "access": "public",
     "export": false,
-    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
+    "importPath": "@list-abstraction/doubly-linked-list/src/ReverseIterator.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 173,
+    "lineNumber": 9,
     "undocument": true,
     "params": [],
     "return": {
@@ -1233,39 +1369,35 @@
     "ignore": true
   },
   {
-    "__docId__": 71,
-    "kind": "function",
-    "name": "copy",
-    "memberof": "src/DoublyLinkedList.js",
-    "generator": false,
-    "async": false,
-    "static": true,
-    "longname": "src/DoublyLinkedList.js~copy",
-    "access": "public",
-    "export": false,
-    "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 177,
-    "undocument": true,
-    "params": [],
-    "return": {
-      "types": [
-        "*"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 72,
+    "__docId__": 78,
     "kind": "file",
     "name": "src/index.js",
-    "content": "export * from './DoublyLinkedList.js';\n",
+    "content": "import DoublyLinkedList from './DoublyLinkedList.js';\n\nexport {default as DoublyLinkedList} from './DoublyLinkedList.js';\nexport {default as Iterator} from './Iterator.js';\nexport {default as Node} from './Node.js';\nexport {default as ReverseIterator} from './ReverseIterator.js';\nexport const from = DoublyLinkedList.from;\n",
     "static": true,
     "longname": "/home/runner/work/doubly-linked-list/doubly-linked-list/src/index.js",
     "access": "public",
     "description": null,
     "lineNumber": 1
+  },
+  {
+    "__docId__": 79,
+    "kind": "variable",
+    "name": "from",
+    "memberof": "src/index.js",
+    "static": true,
+    "longname": "src/index.js~from",
+    "access": "public",
+    "export": true,
+    "importPath": "@list-abstraction/doubly-linked-list/src/index.js",
+    "importStyle": "{from}",
+    "description": null,
+    "lineNumber": 7,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
   },
   {
     "kind": "index",
@@ -1277,7 +1409,7 @@
   },
   {
     "kind": "packageJSON",
-    "content": "{\n  \"name\": \"@list-abstraction/doubly-linked-list\",\n  \"description\": \"Doubly linked list for JavaScript\",\n  \"version\": \"8.0.0\",\n  \"license\": \"AGPL-3.0\",\n  \"author\": \"make-github-pseudonymous-again\",\n  \"homepage\": \"https://list-abstraction.github.io/doubly-linked-list\",\n  \"repository\": {\n    \"url\": \"https://github.com/list-abstraction/doubly-linked-list\",\n    \"type\": \"git\"\n  },\n  \"bugs\": {\n    \"url\": \"https://github.com/list-abstraction/doubly-linked-list/issues\"\n  },\n  \"keywords\": [\n    \"bricks\",\n    \"data\",\n    \"dll\",\n    \"doubly\",\n    \"doubly linked list\",\n    \"ender\",\n    \"javascript\",\n    \"js\",\n    \"linked\",\n    \"list\",\n    \"structure\",\n    \"structures\"\n  ],\n  \"sideEffects\": false,\n  \"type\": \"module\",\n  \"source\": \"src/index.js\",\n  \"main\": \"dist/index.cjs\",\n  \"module\": \"dist/index.module.js\",\n  \"esmodule\": \"dist/index.modern.js\",\n  \"umd:main\": \"dist/index.umd.js\",\n  \"unpkg\": \"dist/index.umd.js\",\n  \"exports\": {\n    \".\": {\n      \"browser\": \"./dist/index.module.js\",\n      \"umd\": \"./dist/index.umd.js\",\n      \"require\": \"./dist/index.cjs\",\n      \"default\": \"./dist/index.modern.js\"\n    }\n  },\n  \"files\": [\n    \"dist\"\n  ],\n  \"publishConfig\": {\n    \"access\": \"public\"\n  },\n  \"scripts\": {\n    \"build\": \"NODE_ENV=production microbundle\",\n    \"build-docs\": \"esdoc\",\n    \"build-gh-pages\": \"npm run build-docs\",\n    \"commit-msg\": \"commitlint --edit\",\n    \"cover\": \"NODE_ENV=cover c8 --all --src src --reporter lcov --reporter text-summary --reporter text npm test\",\n    \"debug\": \"NODE_ENV=debug npm run test -- -st --fail-fast\",\n    \"dev\": \"npm run lint-config-and-fix && npm run lint-and-fix && npm run cover -- -- -st --fail-fast\",\n    \"install-hooks\": \"husky install\",\n    \"lint\": \"xo\",\n    \"lint-and-fix\": \"npm run lint -- --fix\",\n    \"lint-config\": \"fixpack --dryRun\",\n    \"lint-config-and-fix\": \"fixpack || fixpack\",\n    \"postinstall\": \"npm run install-hooks\",\n    \"postpublish\": \"pinst --enable\",\n    \"precommit\": \"lint-staged\",\n    \"prepare\": \"npm run build\",\n    \"prepublishOnly\": \"pinst --disable\",\n    \"release\": \"np --message ':hatching_chick: release: Bumping to v%s.'\",\n    \"test\": \"npm run test:src\",\n    \"test-cmd\": \"NODE_LOADER_CONFIG=test/loader/config.js ava\",\n    \"test:cjs\": \"IMPORT_MAP_PATH=test/import-maps/dist/index.json npm run test-cmd\",\n    \"test:dist\": \"npm run test:modern && npm run test:module && npm run test:cjs\",\n    \"test:modern\": \"IMPORT_MAP_PATH=test/import-maps/dist/index.modern.json npm run test-cmd\",\n    \"test:module\": \"IMPORT_MAP_PATH=test/import-maps/dist/index.module.json npm run test-cmd\",\n    \"test:src\": \"IMPORT_MAP_PATH=test/import-maps/src/index.json npm run test-cmd\"\n  },\n  \"dependencies\": {},\n  \"devDependencies\": {\n    \"@babel/core\": \"7.13.10\",\n    \"@babel/plugin-transform-destructuring\": \"7.20.2\",\n    \"@babel/plugin-transform-for-of\": \"7.18.8\",\n    \"@babel/preset-env\": \"7.13.10\",\n    \"@commitlint/cli\": \"17.2.0\",\n    \"@js-library/commitlint-config\": \"0.0.4\",\n    \"@list-abstraction/specification\": \"10.0.0\",\n    \"@node-loader/babel\": \"2.0.1\",\n    \"@node-loader/core\": \"2.0.0\",\n    \"@node-loader/import-maps\": \"1.1.0\",\n    \"ava\": \"4.3.3\",\n    \"babel-plugin-transform-remove-console\": \"6.9.4\",\n    \"babel-plugin-unassert\": \"3.2.0\",\n    \"babel-preset-power-assert\": \"3.0.0\",\n    \"c8\": \"7.12.0\",\n    \"esdoc\": \"1.1.0\",\n    \"esdoc-inject-script-plugin\": \"1.0.0\",\n    \"esdoc-inject-style-plugin\": \"1.0.0\",\n    \"esdoc-standard-plugin\": \"1.0.0\",\n    \"fixpack\": \"4.0.0\",\n    \"husky\": \"8.0.1\",\n    \"lint-staged\": \"13.0.3\",\n    \"microbundle\": \"0.15.1\",\n    \"np\": \"7.4.0\",\n    \"pinst\": \"3.0.0\",\n    \"power-assert\": \"1.6.1\",\n    \"regenerator-runtime\": \"0.13.10\",\n    \"xo\": \"0.52.4\"\n  },\n  \"ava\": {\n    \"files\": [\n      \"test/src/**/*\"\n    ],\n    \"nodeArguments\": [\n      \"--experimental-loader=@node-loader/core\"\n    ],\n    \"require\": [\n      \"regenerator-runtime/runtime\"\n    ],\n    \"timeout\": \"1m\"\n  },\n  \"babel\": {\n    \"sourceMaps\": true,\n    \"plugins\": [\n      \"@babel/plugin-proposal-async-generator-functions\",\n      [\n        \"transform-remove-console\",\n        {\n          \"exclude\": [\n            \"log\",\n            \"error\",\n            \"warn\"\n          ]\n        }\n      ]\n    ],\n    \"env\": {\n      \"debug\": {\n        \"sourceMaps\": \"both\",\n        \"presets\": [\n          \"babel-preset-power-assert\"\n        ],\n        \"plugins\": [\n          [\n            \"transform-remove-console\",\n            {\n              \"exclude\": [\n                \"debug\",\n                \"log\",\n                \"error\",\n                \"warn\"\n              ]\n            }\n          ]\n        ]\n      },\n      \"test\": {\n        \"sourceMaps\": \"both\",\n        \"presets\": [\n          \"babel-preset-power-assert\"\n        ]\n      },\n      \"cover\": {\n        \"sourceMaps\": \"both\",\n        \"presets\": [\n          \"babel-preset-power-assert\"\n        ]\n      },\n      \"development\": {\n        \"presets\": [\n          [\n            \"@babel/preset-env\",\n            {\n              \"targets\": [\n                \"defaults\",\n                \"maintained node versions\"\n              ]\n            }\n          ],\n          \"babel-preset-power-assert\"\n        ]\n      },\n      \"production\": {\n        \"presets\": [\n          [\n            \"@babel/preset-env\",\n            {\n              \"targets\": [\n                \"defaults\",\n                \"maintained node versions\"\n              ]\n            }\n          ]\n        ],\n        \"plugins\": [\n          \"@babel/plugin-transform-destructuring\",\n          \"@babel/plugin-transform-for-of\",\n          \"babel-plugin-unassert\"\n        ]\n      }\n    }\n  },\n  \"lint-staged\": {\n    \"*.js\": [\n      \"npm run lint-and-fix\"\n    ],\n    \"package.json\": [\n      \"npm run lint-config-and-fix\"\n    ]\n  },\n  \"prettier\": {\n    \"trailingComma\": \"all\"\n  },\n  \"xo\": {\n    \"prettier\": true,\n    \"plugins\": [\n      \"unicorn\"\n    ],\n    \"rules\": {\n      \"unicorn/filename-case\": \"off\",\n      \"camelcase\": \"off\",\n      \"unicorn/prevent-abbreviations\": \"off\",\n      \"no-constant-condition\": \"off\",\n      \"unicorn/prefer-node-protocol\": \"off\",\n      \"unicorn/prefer-math-trunc\": \"off\",\n      \"unicorn/no-new-array\": \"off\",\n      \"no-negated-condition\": \"off\"\n    },\n    \"overrides\": [\n      {\n        \"files\": [\n          \"doc/**\"\n        ],\n        \"env\": \"browser\"\n      }\n    ]\n  }\n}\n",
+    "content": "{\n  \"name\": \"@list-abstraction/doubly-linked-list\",\n  \"description\": \"Doubly linked list for JavaScript\",\n  \"version\": \"8.1.0\",\n  \"license\": \"AGPL-3.0\",\n  \"author\": \"make-github-pseudonymous-again\",\n  \"homepage\": \"https://list-abstraction.github.io/doubly-linked-list\",\n  \"repository\": {\n    \"url\": \"https://github.com/list-abstraction/doubly-linked-list\",\n    \"type\": \"git\"\n  },\n  \"bugs\": {\n    \"url\": \"https://github.com/list-abstraction/doubly-linked-list/issues\"\n  },\n  \"keywords\": [\n    \"bricks\",\n    \"data\",\n    \"dll\",\n    \"doubly\",\n    \"doubly linked list\",\n    \"ender\",\n    \"javascript\",\n    \"js\",\n    \"linked\",\n    \"list\",\n    \"structure\",\n    \"structures\"\n  ],\n  \"sideEffects\": false,\n  \"type\": \"module\",\n  \"source\": \"src/index.js\",\n  \"main\": \"dist/index.cjs\",\n  \"module\": \"dist/index.module.js\",\n  \"esmodule\": \"dist/index.modern.js\",\n  \"umd:main\": \"dist/index.umd.js\",\n  \"unpkg\": \"dist/index.umd.js\",\n  \"exports\": {\n    \".\": {\n      \"browser\": \"./dist/index.module.js\",\n      \"umd\": \"./dist/index.umd.js\",\n      \"require\": \"./dist/index.cjs\",\n      \"default\": \"./dist/index.modern.js\"\n    }\n  },\n  \"files\": [\n    \"dist\"\n  ],\n  \"publishConfig\": {\n    \"access\": \"public\"\n  },\n  \"scripts\": {\n    \"build\": \"NODE_ENV=production microbundle\",\n    \"build-docs\": \"esdoc\",\n    \"build-gh-pages\": \"npm run build-docs\",\n    \"commit-msg\": \"commitlint --edit\",\n    \"cover\": \"NODE_ENV=cover c8 --all --src src --reporter lcov --reporter text-summary --reporter text npm test\",\n    \"debug\": \"NODE_ENV=debug npm run test -- -st --fail-fast\",\n    \"dev\": \"npm run lint-config-and-fix && npm run lint-and-fix && npm run cover -- -- -st --fail-fast\",\n    \"install-hooks\": \"husky install\",\n    \"lint\": \"xo\",\n    \"lint-and-fix\": \"npm run lint -- --fix\",\n    \"lint-config\": \"fixpack --dryRun\",\n    \"lint-config-and-fix\": \"fixpack || fixpack\",\n    \"postinstall\": \"npm run install-hooks\",\n    \"postpublish\": \"pinst --enable\",\n    \"precommit\": \"lint-staged\",\n    \"prepare\": \"npm run build\",\n    \"prepublishOnly\": \"pinst --disable\",\n    \"release\": \"np --message ':hatching_chick: release: Bumping to v%s.'\",\n    \"test\": \"npm run test:src\",\n    \"test-cmd\": \"NODE_LOADER_CONFIG=test/loader/config.js ava\",\n    \"test:cjs\": \"IMPORT_MAP_PATH=test/import-maps/dist/index.json npm run test-cmd\",\n    \"test:dist\": \"npm run test:modern && npm run test:module && npm run test:cjs\",\n    \"test:modern\": \"IMPORT_MAP_PATH=test/import-maps/dist/index.modern.json npm run test-cmd\",\n    \"test:module\": \"IMPORT_MAP_PATH=test/import-maps/dist/index.module.json npm run test-cmd\",\n    \"test:src\": \"IMPORT_MAP_PATH=test/import-maps/src/index.json npm run test-cmd\"\n  },\n  \"dependencies\": {},\n  \"devDependencies\": {\n    \"@babel/core\": \"7.13.10\",\n    \"@babel/plugin-transform-destructuring\": \"7.20.2\",\n    \"@babel/plugin-transform-for-of\": \"7.18.8\",\n    \"@babel/preset-env\": \"7.13.10\",\n    \"@commitlint/cli\": \"17.2.0\",\n    \"@js-library/commitlint-config\": \"0.0.4\",\n    \"@list-abstraction/specification\": \"10.0.0\",\n    \"@node-loader/babel\": \"2.0.1\",\n    \"@node-loader/core\": \"2.0.0\",\n    \"@node-loader/import-maps\": \"1.1.0\",\n    \"ava\": \"4.3.3\",\n    \"babel-plugin-transform-remove-console\": \"6.9.4\",\n    \"babel-plugin-unassert\": \"3.2.0\",\n    \"babel-preset-power-assert\": \"3.0.0\",\n    \"c8\": \"7.12.0\",\n    \"esdoc\": \"1.1.0\",\n    \"esdoc-inject-script-plugin\": \"1.0.0\",\n    \"esdoc-inject-style-plugin\": \"1.0.0\",\n    \"esdoc-standard-plugin\": \"1.0.0\",\n    \"fixpack\": \"4.0.0\",\n    \"husky\": \"8.0.1\",\n    \"lint-staged\": \"13.0.3\",\n    \"microbundle\": \"0.15.1\",\n    \"np\": \"7.4.0\",\n    \"pinst\": \"3.0.0\",\n    \"power-assert\": \"1.6.1\",\n    \"regenerator-runtime\": \"0.13.10\",\n    \"xo\": \"0.52.4\"\n  },\n  \"ava\": {\n    \"files\": [\n      \"test/src/**/*\"\n    ],\n    \"nodeArguments\": [\n      \"--experimental-loader=@node-loader/core\"\n    ],\n    \"require\": [\n      \"regenerator-runtime/runtime\"\n    ],\n    \"timeout\": \"1m\"\n  },\n  \"babel\": {\n    \"sourceMaps\": true,\n    \"plugins\": [\n      \"@babel/plugin-proposal-async-generator-functions\",\n      [\n        \"transform-remove-console\",\n        {\n          \"exclude\": [\n            \"log\",\n            \"error\",\n            \"warn\"\n          ]\n        }\n      ]\n    ],\n    \"env\": {\n      \"debug\": {\n        \"sourceMaps\": \"both\",\n        \"presets\": [\n          \"babel-preset-power-assert\"\n        ],\n        \"plugins\": [\n          [\n            \"transform-remove-console\",\n            {\n              \"exclude\": [\n                \"debug\",\n                \"log\",\n                \"error\",\n                \"warn\"\n              ]\n            }\n          ]\n        ]\n      },\n      \"test\": {\n        \"sourceMaps\": \"both\",\n        \"presets\": [\n          \"babel-preset-power-assert\"\n        ]\n      },\n      \"cover\": {\n        \"sourceMaps\": \"both\",\n        \"presets\": [\n          \"babel-preset-power-assert\"\n        ]\n      },\n      \"development\": {\n        \"presets\": [\n          [\n            \"@babel/preset-env\",\n            {\n              \"targets\": [\n                \"defaults\",\n                \"maintained node versions\"\n              ]\n            }\n          ],\n          \"babel-preset-power-assert\"\n        ]\n      },\n      \"production\": {\n        \"presets\": [\n          [\n            \"@babel/preset-env\",\n            {\n              \"targets\": [\n                \"defaults\",\n                \"maintained node versions\"\n              ]\n            }\n          ]\n        ],\n        \"plugins\": [\n          \"@babel/plugin-transform-destructuring\",\n          \"@babel/plugin-transform-for-of\",\n          \"babel-plugin-unassert\"\n        ]\n      }\n    }\n  },\n  \"lint-staged\": {\n    \"*.js\": [\n      \"npm run lint-and-fix\"\n    ],\n    \"package.json\": [\n      \"npm run lint-config-and-fix\"\n    ]\n  },\n  \"prettier\": {\n    \"trailingComma\": \"all\"\n  },\n  \"xo\": {\n    \"prettier\": true,\n    \"plugins\": [\n      \"unicorn\"\n    ],\n    \"rules\": {\n      \"unicorn/filename-case\": \"off\",\n      \"camelcase\": \"off\",\n      \"unicorn/prevent-abbreviations\": \"off\",\n      \"no-constant-condition\": \"off\",\n      \"unicorn/prefer-node-protocol\": \"off\",\n      \"unicorn/prefer-math-trunc\": \"off\",\n      \"unicorn/no-new-array\": \"off\",\n      \"no-negated-condition\": \"off\"\n    },\n    \"overrides\": [\n      {\n        \"files\": [\n          \"doc/**\"\n        ],\n        \"env\": \"browser\"\n      }\n    ]\n  }\n}\n",
     "longname": "/home/runner/work/doubly-linked-list/doubly-linked-list/package.json",
     "name": "package.json",
     "static": true,
@@ -1324,7 +1456,7 @@
     "access": "public"
   },
   {
-    "__docId__": 73,
+    "__docId__": 80,
     "kind": "testFile",
     "name": "src/list-spec.js",
     "content": "import test from 'ava';\nimport * as spec from '@list-abstraction/specification';\nimport * as dll from '#module';\n\nspec.test(test, 'DoublyLinkedList', dll.DoublyLinkedList);\n",

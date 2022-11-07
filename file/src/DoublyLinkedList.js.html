@@ -33,40 +33,26 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Iterator">Iterator</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Node">Node</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ReverseIterator">ReverseIterator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-from">from</a></span></span></li>
 </ul>
 </div>
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/DoublyLinkedList.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import Node from &apos;./Node.js&apos;;
+import Iterator from &apos;./Iterator.js&apos;;
+import ReverseIterator from &apos;./ReverseIterator.js&apos;;
+
+/**
  * Doubly linked list implementation
  * making use of dummy nodes for the
  * sake of simplicity.
  */
-
-export function DoublyLinkedList() {
+export default function DoublyLinkedList() {
 	this.front = new Node(null, null, null);
 	this.back = new Node(this.front, null, null);
 	this.front.next = this.back;
 	this.length = 0;
-}
-
-export function Node(prev, next, value) {
-	this.prev = prev;
-	this.next = next;
-	this.value = value;
-}
-
-export function Iterator(front, back, current) {
-	this.front = front;
-	this.back = back;
-	this.current = current;
-}
-
-export function ReverseIterator(front, back, current) {
-	this.front = front;
-	this.back = back;
-	this.current = current;
 }
 
 DoublyLinkedList.prototype.insertAfter = function (iterator, value) {
@@ -210,34 +196,17 @@ DoublyLinkedList.prototype.rend = function () {
 	return this.riterator(this.front);
 };
 
-Iterator.prototype.copy = function () {
-	return new Iterator(this.front, this.back, this.current);
-};
-
-ReverseIterator.prototype.copy = function () {
-	return new ReverseIterator(this.front, this.back, this.current);
-};
-
-// eslint-disable-next-line no-multi-assign
-Iterator.prototype.next = ReverseIterator.prototype.prev = function () {
-	// eslint-disable-next-line no-multi-assign
-	const c = (this.current = this.current.next);
-
-	return c === this.back ? {done: true} : {value: c.value, done: false};
-};
-
-// eslint-disable-next-line no-multi-assign
-Iterator.prototype.prev = ReverseIterator.prototype.next = function () {
-	// eslint-disable-next-line no-multi-assign
-	const c = (this.current = this.current.prev);
-
-	return c === this.front ? {done: true} : {value: c.value, done: false};
+const from = (iterable) =&gt; {
+	const list = new DoublyLinkedList();
+	for (const value of iterable) list.push(value);
+	return list;
 };
 
 DoublyLinkedList.prototype[Symbol.iterator] = DoublyLinkedList.prototype.begin;
 DoublyLinkedList.Node = Node;
 DoublyLinkedList.Iterator = Iterator;
 DoublyLinkedList.ReverseIterator = ReverseIterator;
+DoublyLinkedList.from = from;
 </code></pre>
 
 </div>

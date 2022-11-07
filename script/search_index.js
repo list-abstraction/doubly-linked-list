@@ -6,22 +6,28 @@ window.esdocSearchIndex = [
     "function"
   ],
   [
-    "@list-abstraction/doubly-linked-list/src/doublylinkedlist.js~iterator",
+    "@list-abstraction/doubly-linked-list/src/iterator.js~iterator",
     "function/index.html#static-function-Iterator",
-    "<span>Iterator</span> <span class=\"search-result-import-path\">@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js</span>",
+    "<span>Iterator</span> <span class=\"search-result-import-path\">@list-abstraction/doubly-linked-list/src/Iterator.js</span>",
     "function"
   ],
   [
-    "@list-abstraction/doubly-linked-list/src/doublylinkedlist.js~node",
+    "@list-abstraction/doubly-linked-list/src/node.js~node",
     "function/index.html#static-function-Node",
-    "<span>Node</span> <span class=\"search-result-import-path\">@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js</span>",
+    "<span>Node</span> <span class=\"search-result-import-path\">@list-abstraction/doubly-linked-list/src/Node.js</span>",
     "function"
   ],
   [
-    "@list-abstraction/doubly-linked-list/src/doublylinkedlist.js~reverseiterator",
+    "@list-abstraction/doubly-linked-list/src/reverseiterator.js~reverseiterator",
     "function/index.html#static-function-ReverseIterator",
-    "<span>ReverseIterator</span> <span class=\"search-result-import-path\">@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js</span>",
+    "<span>ReverseIterator</span> <span class=\"search-result-import-path\">@list-abstraction/doubly-linked-list/src/ReverseIterator.js</span>",
     "function"
+  ],
+  [
+    "@list-abstraction/doubly-linked-list/src/index.js~from",
+    "variable/index.html#static-variable-from",
+    "<span>from</span> <span class=\"search-result-import-path\">@list-abstraction/doubly-linked-list/src/index.js</span>",
+    "variable"
   ],
   [
     "src/.external-ecmascript.js~array",
@@ -309,6 +315,24 @@ window.esdocSearchIndex = [
     "src/doublylinkedlist.js",
     "file/src/DoublyLinkedList.js.html",
     "src/DoublyLinkedList.js",
+    "file"
+  ],
+  [
+    "src/iterator.js",
+    "file/src/Iterator.js.html",
+    "src/Iterator.js",
+    "file"
+  ],
+  [
+    "src/node.js",
+    "file/src/Node.js.html",
+    "src/Node.js",
+    "file"
+  ],
+  [
+    "src/reverseiterator.js",
+    "file/src/ReverseIterator.js.html",
+    "src/ReverseIterator.js",
     "file"
   ],
   [
