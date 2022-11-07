@@ -1,8 +1,8 @@
 import test from 'ava';
-import * as dll from '#module';
+import {DoublyLinkedList} from '#module';
 
 test('DoublyLinkedList', (t) => {
-	const list = new dll.DoublyLinkedList();
+	const list = new DoublyLinkedList();
 
 	const a = list.push(1);
 	const b = list.push(2);
