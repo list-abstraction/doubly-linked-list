@@ -1,7 +1,7 @@
 {
   "name": "@list-abstraction/doubly-linked-list",
   "description": "Doubly linked list for JavaScript",
-  "version": "7.0.0",
+  "version": "8.0.0",
   "license": "AGPL-3.0",
   "author": "make-github-pseudonymous-again",
   "homepage": "https://list-abstraction.github.io/doubly-linked-list",
