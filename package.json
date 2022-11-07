@@ -31,7 +31,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@list-abstraction/specification": "9.0.1",
+    "@list-abstraction/specification": "10.0.0",
     "@babel/cli": "7.13.10",
     "@babel/core": "7.13.10",
     "@babel/polyfill": "7.12.1",
