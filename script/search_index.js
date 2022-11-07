@@ -1,26 +1,26 @@
 window.esdocSearchIndex = [
   [
-    "@aureooms/js-dll/src/doublylinkedlist.js~doublylinkedlist",
+    "@list-abstraction/doubly-linked-list/src/doublylinkedlist.js~doublylinkedlist",
     "function/index.html#static-function-DoublyLinkedList",
-    "<span>DoublyLinkedList</span> <span class=\"search-result-import-path\">@aureooms/js-dll/src/DoublyLinkedList.js</span>",
+    "<span>DoublyLinkedList</span> <span class=\"search-result-import-path\">@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js</span>",
     "function"
   ],
   [
-    "@aureooms/js-dll/src/doublylinkedlist.js~iterator",
+    "@list-abstraction/doubly-linked-list/src/doublylinkedlist.js~iterator",
     "function/index.html#static-function-Iterator",
-    "<span>Iterator</span> <span class=\"search-result-import-path\">@aureooms/js-dll/src/DoublyLinkedList.js</span>",
+    "<span>Iterator</span> <span class=\"search-result-import-path\">@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js</span>",
     "function"
   ],
   [
-    "@aureooms/js-dll/src/doublylinkedlist.js~node",
+    "@list-abstraction/doubly-linked-list/src/doublylinkedlist.js~node",
     "function/index.html#static-function-Node",
-    "<span>Node</span> <span class=\"search-result-import-path\">@aureooms/js-dll/src/DoublyLinkedList.js</span>",
+    "<span>Node</span> <span class=\"search-result-import-path\">@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js</span>",
     "function"
   ],
   [
-    "@aureooms/js-dll/src/doublylinkedlist.js~reverseiterator",
+    "@list-abstraction/doubly-linked-list/src/doublylinkedlist.js~reverseiterator",
     "function/index.html#static-function-ReverseIterator",
-    "<span>ReverseIterator</span> <span class=\"search-result-import-path\">@aureooms/js-dll/src/DoublyLinkedList.js</span>",
+    "<span>ReverseIterator</span> <span class=\"search-result-import-path\">@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js</span>",
     "function"
   ],
   [
