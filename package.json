@@ -27,12 +27,25 @@
     "structures"
   ],
   "sideEffects": false,
-  "main": "lib/index.js",
+  "source": "src/index.js",
+  "main": "dist/index.cjs",
+  "module": "dist/index.module.js",
+  "esmodule": "dist/index.modern.js",
+  "umd:main": "dist/index.umd.js",
+  "unpkg": "dist/index.umd.js",
+  "exports": {
+    ".": {
+      "browser": "./dist/index.module.js",
+      "umd": "./dist/index.umd.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.modern.js"
+    }
+  },
   "files": [
-    "lib"
+    "dist"
   ],
   "scripts": {
-    "build": "rm -rf lib && babel src -d lib",
+    "build": "NODE_ENV=production microbundle",
     "build-docs": "esdoc",
     "build-gh-pages": "npm run build-docs",
     "commit-msg": "commitlint --edit",
@@ -49,8 +62,9 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@babel/cli": "7.13.10",
     "@babel/core": "7.13.10",
+    "@babel/plugin-transform-destructuring": "7.20.2",
+    "@babel/plugin-transform-for-of": "7.18.8",
     "@babel/preset-env": "7.13.10",
     "@babel/register": "7.13.8",
     "@commitlint/cli": "17.2.0",
@@ -68,6 +82,7 @@
     "esdoc-standard-plugin": "1.0.0",
     "fixpack": "4.0.0",
     "husky": "8.0.1",
+    "microbundle": "0.15.1",
     "np": "7.4.0",
     "pinst": "3.0.0",
     "power-assert": "1.6.1",
@@ -166,6 +181,8 @@
           ]
         ],
         "plugins": [
+          "@babel/plugin-transform-destructuring",
+          "@babel/plugin-transform-for-of",
           "babel-plugin-unassert"
         ]
       }
