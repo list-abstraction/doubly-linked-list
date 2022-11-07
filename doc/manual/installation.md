@@ -8,15 +8,15 @@ or [jspm](https://jspm.org/docs).
 
 ### yarn
 ```terminal
-yarn add @aureooms/js-dll
+yarn add @list-abstraction/doubly-linked-list
 ```
 
 ### npm
 ```terminal
-npm install @aureooms/js-dll --save
+npm install @list-abstraction/doubly-linked-list --save
 ```
 
 ### jspm
 ```terminal
-jspm install npm:@aureooms/js-dll
+jspm install npm:@list-abstraction/doubly-linked-list
 ```

@@ -12,7 +12,7 @@ import '@babel/polyfill' ;
 
 Then, import the library where needed
 ```js
-const dll = require( '@aureooms/js-dll' ) ;
+const dll = require( '@list-abstraction/doubly-linked-list' ) ;
 // or
-import * as dll from '@aureooms/js-dll' ;
+import * as dll from '@list-abstraction/doubly-linked-list' ;
 ```

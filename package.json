@@ -1,8 +1,8 @@
 {
-  "name": "@aureooms/js-dll",
+  "name": "@list-abstraction/doubly-linked-list",
   "description": "Doubly linked list code bricks for JavaScript",
   "version": "7.0.0",
-  "author": "aureooms",
+  "author": "make-github-pseudonymous-again",
   "ava": {
     "files": [
       "test/src/**/*"
@@ -27,11 +27,11 @@
     }
   },
   "bugs": {
-    "url": "https://github.com/make-github-pseudonymous-again/js-dll/issues"
+    "url": "https://github.com/list-abstraction/doubly-linked-list/issues"
   },
   "dependencies": {},
   "devDependencies": {
-    "@aureooms/js-list-spec": "9.0.1",
+    "@list-abstraction/specification": "9.0.1",
     "@babel/cli": "7.13.10",
     "@babel/core": "7.13.10",
     "@babel/polyfill": "7.12.1",
@@ -49,7 +49,7 @@
   "files": [
     "lib"
   ],
-  "homepage": "http://make-github-pseudonymous-again.github.io/js-dll/",
+  "homepage": "http://list-abstraction.github.io/doubly-linked-list",
   "keywords": [
     "bricks",
     "data",
@@ -67,7 +67,7 @@
   "license": "AGPL-3.0",
   "main": "lib/index.js",
   "repository": {
-    "url": "https://github.com/make-github-pseudonymous-again/js-dll.git",
+    "url": "https://github.com/list-abstraction/doubly-linked-list.git",
     "type": "git"
   },
   "scripts": {

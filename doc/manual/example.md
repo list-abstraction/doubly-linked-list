@@ -1,10 +1,10 @@
 # Examples
 
-> More examples in [the test files](https://github.com/make-github-pseudonymous-again/js-dll/tree/main/test/src).
+> More examples in [the test files](https://github.com/list-abstraction/doubly-linked-list/tree/main/test/src).
 
 ```js
 
-import { DoublyLinkedList as List } from '@aureooms/js-dll' ;
+import { DoublyLinkedList as List } from '@list-abstraction/doubly-linked-list' ;
 
 let list = new List( ) ;
 

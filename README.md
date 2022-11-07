@@ -1,27 +1,28 @@
-[@aureooms/js-dll](https://make-github-pseudonymous-again.github.io/js-dll)
+:oden:
+[@list-abstraction/doubly-linked-list](https://list-abstraction.github.io/doubly-linked-list)
 ==
 
-Doubly linked list code bricks for Javascript.
+Doubly linked list for Javascript.
 Implements the specification in
-[@aureooms/js-list-spec](https://github.com/make-github-pseudonymous-again/js-list-spec).
+[@list-abstraction/specification](https://github.com/list-abstraction/specification).
 Parent is
-[@aureooms/js-data-structures](https://github.com/make-github-pseudonymous-again/js-data-structures).
+[js-data-structures](https://github.com/make-github-pseudonymous-again/js-data-structures).
 
 ```js
 for ( let value of list ) ... ;
 ```
 
-[![License](https://img.shields.io/github/license/make-github-pseudonymous-again/js-dll.svg)](https://raw.githubusercontent.com/make-github-pseudonymous-again/js-dll/main/LICENSE)
-[![Version](https://img.shields.io/npm/v/@aureooms/js-dll.svg)](https://www.npmjs.org/package/@aureooms/js-dll)
-[![Build](https://img.shields.io/travis/make-github-pseudonymous-again/js-dll/main.svg)](https://travis-ci.org/make-github-pseudonymous-again/js-dll/branches)
-[![Dependencies](https://img.shields.io/david/make-github-pseudonymous-again/js-dll.svg)](https://david-dm.org/make-github-pseudonymous-again/js-dll)
-[![Dev dependencies](https://img.shields.io/david/dev/make-github-pseudonymous-again/js-dll.svg)](https://david-dm.org/make-github-pseudonymous-again/js-dll?type=dev)
-[![GitHub issues](https://img.shields.io/github/issues/make-github-pseudonymous-again/js-dll.svg)](https://github.com/make-github-pseudonymous-again/js-dll/issues)
-[![Downloads](https://img.shields.io/npm/dm/@aureooms/js-dll.svg)](https://www.npmjs.org/package/@aureooms/js-dll)
+[![License](https://img.shields.io/github/license/list-abstraction/doubly-linked-list.svg)](https://raw.githubusercontent.com/list-abstraction/doubly-linked-list/main/LICENSE)
+[![Version](https://img.shields.io/npm/v/@list-abstraction/doubly-linked-list.svg)](https://www.npmjs.org/package/@list-abstraction/doubly-linked-list)
+[![Build](https://img.shields.io/travis/list-abstraction/doubly-linked-list/main.svg)](https://travis-ci.org/list-abstraction/doubly-linked-list/branches)
+[![Dependencies](https://img.shields.io/david/list-abstraction/doubly-linked-list.svg)](https://david-dm.org/list-abstraction/doubly-linked-list)
+[![Dev dependencies](https://img.shields.io/david/dev/list-abstraction/doubly-linked-list.svg)](https://david-dm.org/list-abstraction/doubly-linked-list?type=dev)
+[![GitHub issues](https://img.shields.io/github/issues/list-abstraction/doubly-linked-list.svg)](https://github.com/list-abstraction/doubly-linked-list/issues)
+[![Downloads](https://img.shields.io/npm/dm/@list-abstraction/doubly-linked-list.svg)](https://www.npmjs.org/package/@list-abstraction/doubly-linked-list)
 
-[![Code issues](https://img.shields.io/codeclimate/issues/make-github-pseudonymous-again/js-dll.svg)](https://codeclimate.com/github/make-github-pseudonymous-again/js-dll/issues)
-[![Code maintainability](https://img.shields.io/codeclimate/maintainability/make-github-pseudonymous-again/js-dll.svg)](https://codeclimate.com/github/make-github-pseudonymous-again/js-dll/trends/churn)
-[![Code coverage (cov)](https://img.shields.io/codecov/c/gh/make-github-pseudonymous-again/js-dll/main.svg)](https://codecov.io/gh/make-github-pseudonymous-again/js-dll)
-[![Code technical debt](https://img.shields.io/codeclimate/tech-debt/make-github-pseudonymous-again/js-dll.svg)](https://codeclimate.com/github/make-github-pseudonymous-again/js-dll/trends/technical_debt)
-[![Documentation](https://make-github-pseudonymous-again.github.io/js-dll//badge.svg)](https://make-github-pseudonymous-again.github.io/js-dll//source.html)
-[![Package size](https://img.shields.io/bundlephobia/minzip/@aureooms/js-dll)](https://bundlephobia.com/result?p=@aureooms/js-dll)
+[![Code issues](https://img.shields.io/codeclimate/issues/list-abstraction/doubly-linked-list.svg)](https://codeclimate.com/github/list-abstraction/doubly-linked-list/issues)
+[![Code maintainability](https://img.shields.io/codeclimate/maintainability/list-abstraction/doubly-linked-list.svg)](https://codeclimate.com/github/list-abstraction/doubly-linked-list/trends/churn)
+[![Code coverage (cov)](https://img.shields.io/codecov/c/gh/list-abstraction/doubly-linked-list/main.svg)](https://codecov.io/gh/list-abstraction/doubly-linked-list)
+[![Code technical debt](https://img.shields.io/codeclimate/tech-debt/list-abstraction/doubly-linked-list.svg)](https://codeclimate.com/github/list-abstraction/doubly-linked-list/trends/technical_debt)
+[![Documentation](https://list-abstraction.github.io/doubly-linked-list/badge.svg)](https://list-abstraction.github.io/doubly-linked-list/source.html)
+[![Package size](https://img.shields.io/bundlephobia/minzip/@list-abstraction/doubly-linked-list)](https://bundlephobia.com/result?p=@list-abstraction/doubly-linked-list)
