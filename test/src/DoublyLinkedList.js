@@ -1,5 +1,5 @@
 import test from 'ava';
-import * as dll from '../../src';
+import * as dll from '../../src/index.js';
 
 test( "DoublyLinkedList" , t => {
 

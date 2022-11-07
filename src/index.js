@@ -1,1 +1,1 @@
-export * from './DoublyLinkedList' ;
+export * from './DoublyLinkedList.js' ;
