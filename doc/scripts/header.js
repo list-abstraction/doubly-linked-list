@@ -7,10 +7,10 @@ const domReady = function (callback) {
 	}
 };
 
-domReady(function () {
+domReady(() => {
 	const projectname = document.createElement('a');
 	projectname.classList.add('project-name');
-	projectname.text = 'list-abstraction/doubly-linked-list';
+	projectname.text = '@list-abstraction/doubly-linked-list';
 	projectname.href = './index.html';
 
 	const header = document.querySelector('header');
@@ -25,7 +25,7 @@ domReady(function () {
 	const input = document.querySelector('.search-input');
 
 	// Active search box when focus on searchBox.
-	input.addEventListener('focus', function () {
+	input.addEventListener('focus', () => {
 		searchBox.classList.add('active');
 	});
 });

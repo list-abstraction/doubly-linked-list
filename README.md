@@ -9,7 +9,12 @@ Parent is
 [js-data-structures](https://github.com/make-github-pseudonymous-again/js-data-structures).
 
 ```js
-for ( let value of list ) ... ;
+import { DoublyLinkedList } from '@list-abstraction/doubly-linked-list' ;
+
+let list = new DoublyLinkedList( ) ;
+for (const value of 'abc') list.push(value);
+
+for (const value of list) ... ;
 ```
 
 [![License](https://img.shields.io/github/license/list-abstraction/doubly-linked-list.svg)](https://raw.githubusercontent.com/list-abstraction/doubly-linked-list/main/LICENSE)

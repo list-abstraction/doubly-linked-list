@@ -1,6 +1,6 @@
 {
   "name": "@list-abstraction/doubly-linked-list",
-  "description": "Doubly linked list code bricks for JavaScript",
+  "description": "Doubly linked list for JavaScript",
   "version": "7.0.0",
   "license": "AGPL-3.0",
   "author": "make-github-pseudonymous-again",

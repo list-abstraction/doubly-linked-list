@@ -3,18 +3,17 @@
 > More examples in [the test files](https://github.com/list-abstraction/doubly-linked-list/tree/main/test/src).
 
 ```js
-
 import { DoublyLinkedList as List } from '@list-abstraction/doubly-linked-list' ;
 
 let list = new List( ) ;
 
-let iterators = [ for ( x of [ 0 , 1 , 2 ] ) list.push( x ) ] ;
+let iterators = [ 0 , 1 , 2 ].map( (x) => list.push( x ) ) ;
 
-[ for ( let element of list ) element ] ; // [ 0 , 1 , 2 ]
+Array.from( list ) ; // [ 0 , 1 , 2 ]
 
 list.erase( iterator[1] ) ; // removes `1` from the list
 
-[ for ( let element of list ) element ] ; // [ 0 , 2 ]
+Array.from( list ) ; // [ 0 , 2 ]
 
 // note that other iterators remain valid
 
