@@ -44,11 +44,9 @@ Implements the specification in
 <a href="https://github.com/list-abstraction/specification">@list-abstraction/specification</a>.
 Parent is
 <a href="https://github.com/make-github-pseudonymous-again/js-data-structures">js-data-structures</a>.</p>
-<pre><code class="lang-js"><code class="source-code prettyprint">import { DoublyLinkedList } from &apos;@list-abstraction/doubly-linked-list&apos; ;
+<pre><code class="lang-js"><code class="source-code prettyprint">import {DoublyLinkedList} from &apos;@list-abstraction/doubly-linked-list&apos;;
 
-let list = new DoublyLinkedList( ) ;
-for (const value of &apos;abc&apos;) list.push(value);
-
+let list = DoublyLinkedList.from(&apos;abc&apos;);
 for (const value of list) ... ;</code>
 </code></pre>
 <p><a href="https://raw.githubusercontent.com/list-abstraction/doubly-linked-list/main/LICENSE"><img src="https://img.shields.io/github/license/list-abstraction/doubly-linked-list.svg" alt="License"></a>
