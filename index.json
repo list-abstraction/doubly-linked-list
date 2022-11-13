@@ -567,7 +567,7 @@
     "__docId__": 48,
     "kind": "file",
     "name": "src/DoublyLinkedList.js",
-    "content": "import Node from './Node.js';\nimport Iterator from './Iterator.js';\nimport ReverseIterator from './ReverseIterator.js';\n\n/**\n * Doubly linked list implementation\n * making use of dummy nodes for the\n * sake of simplicity.\n */\nexport default function DoublyLinkedList() {\n\tthis.front = new Node(null, null, null);\n\tthis.back = new Node(this.front, null, null);\n\tthis.front.next = this.back;\n\tthis.length = 0;\n}\n\nDoublyLinkedList.prototype.insertAfter = function (iterator, value) {\n\tconst prev = iterator.current;\n\n\tconst node = new Node(prev, prev.next, value);\n\tprev.next.prev = node;\n\tprev.next = node;\n\n\t++this.length;\n\treturn this.iterator(node);\n};\n\nDoublyLinkedList.prototype.insertBefore = function (iterator, value) {\n\tconst next = iterator.current;\n\n\tconst node = new Node(next.prev, next, value);\n\tnext.prev.next = node;\n\tnext.prev = node;\n\n\t++this.length;\n\treturn this.iterator(node);\n};\n\nDoublyLinkedList.prototype.unshift = function (value) {\n\treturn this.insertAfter(this.begin(), value);\n};\n\nDoublyLinkedList.prototype.push = function (value) {\n\treturn this.insertBefore(this.end(), value);\n};\n\nDoublyLinkedList.prototype.erase = function (iterator) {\n\tconst node = iterator.current;\n\n\tnode.prev.next = node.next;\n\tnode.next.prev = node.prev;\n\n\t--this.length;\n\treturn this.iterator(node.next);\n};\n\nDoublyLinkedList.prototype.rerase = function (iterator) {\n\tconst node = iterator.current;\n\n\tnode.next.prev = node.prev;\n\tnode.prev.next = node.next;\n\n\t--this.length;\n\treturn this.iterator(node.prev);\n};\n\nDoublyLinkedList.prototype.eraserange = function (first, last) {\n\tconst firstnode = first.current;\n\tconst lastnode = last.current;\n\n\tlastnode.prev = firstnode.prev;\n\tfirstnode.prev.next = lastnode;\n\n\tconst it = first.copy();\n\n\twhile (it.current !== lastnode) {\n\t\t--this.length;\n\t\tit.next();\n\t}\n\n\treturn last.copy();\n};\n\nDoublyLinkedList.prototype.reraserange = function (first, last) {\n\tconst firstnode = first.current;\n\tconst lastnode = last.current;\n\n\tlastnode.next = firstnode.next;\n\tfirstnode.next.prev = lastnode;\n\n\tconst it = first.copy();\n\n\twhile (it.current !== lastnode) {\n\t\t--this.length;\n\t\tit.next();\n\t}\n\n\treturn last.copy();\n};\n\nDoublyLinkedList.prototype.shift = function () {\n\tif (this.length === 0) return null;\n\n\tconst node = this.front.next;\n\n\tthis.front.next = node.next;\n\tnode.next.prev = this.front;\n\n\t--this.length;\n\n\treturn node.value;\n};\n\nDoublyLinkedList.prototype.pop = function () {\n\tif (this.length === 0) return null;\n\n\tconst node = this.back.prev;\n\n\tthis.back.prev = node.prev;\n\tnode.prev.next = this.back;\n\n\t--this.length;\n\n\treturn node.value;\n};\n\nDoublyLinkedList.prototype.clear = function () {\n\tthis.front.next = this.back;\n\tthis.back.prev = this.front;\n\tthis.length = 0;\n\treturn this;\n};\n\nDoublyLinkedList.prototype.iterator = function (node) {\n\treturn new Iterator(this.front, this.back, node);\n};\n\nDoublyLinkedList.prototype.riterator = function (node) {\n\treturn new ReverseIterator(this.front, this.back, node);\n};\n\nDoublyLinkedList.prototype.begin = function () {\n\treturn this.iterator(this.front);\n};\n\nDoublyLinkedList.prototype.end = function () {\n\treturn this.iterator(this.back);\n};\n\nDoublyLinkedList.prototype.rbegin = function () {\n\treturn this.riterator(this.back);\n};\n\nDoublyLinkedList.prototype.rend = function () {\n\treturn this.riterator(this.front);\n};\n\nconst from = (iterable) => {\n\tconst list = new DoublyLinkedList();\n\tfor (const value of iterable) list.push(value);\n\treturn list;\n};\n\nDoublyLinkedList.prototype[Symbol.iterator] = DoublyLinkedList.prototype.begin;\nDoublyLinkedList.Node = Node;\nDoublyLinkedList.Iterator = Iterator;\nDoublyLinkedList.ReverseIterator = ReverseIterator;\nDoublyLinkedList.from = from;\n",
+    "content": "import {\n\tNode,\n\t_concat,\n\t_erase,\n\t_extend,\n\t_remove,\n\t_insertAfter,\n\t_insertBefore,\n} from '@data-structure-algebra/doubly-linked-list';\n\nimport Iterator from './Iterator.js';\nimport ReverseIterator from './ReverseIterator.js';\n\n/**\n * Doubly linked list implementation\n * making use of dummy nodes for the\n * sake of simplicity.\n */\nexport default function DoublyLinkedList() {\n\tthis.front = new Node(null, null, null);\n\tthis.back = new Node(null, this.front, null);\n\tthis.front.next = this.back;\n\tthis.length = 0;\n}\n\nDoublyLinkedList.prototype.insertAfter = function (iterator, value) {\n\tconst prev = iterator.current;\n\n\tconst node = _insertAfter(prev, value);\n\n\t++this.length;\n\treturn this.iterator(node);\n};\n\nDoublyLinkedList.prototype.insertBefore = function (iterator, value) {\n\tconst next = iterator.current;\n\n\tconst node = _insertBefore(next, value);\n\n\t++this.length;\n\treturn this.iterator(node);\n};\n\nDoublyLinkedList.prototype.unshift = function (value) {\n\treturn this.insertAfter(this.begin(), value);\n};\n\nDoublyLinkedList.prototype.push = function (value) {\n\treturn this.insertBefore(this.end(), value);\n};\n\nDoublyLinkedList.prototype.erase = function (iterator) {\n\tconst node = iterator.current;\n\n\t_remove(node);\n\n\t--this.length;\n\treturn this.iterator(node.next);\n};\n\nDoublyLinkedList.prototype.rerase = function (iterator) {\n\tconst node = iterator.current;\n\n\t_remove(node);\n\n\t--this.length;\n\treturn this.iterator(node.prev);\n};\n\nDoublyLinkedList.prototype.eraserange = function (first, last) {\n\tconst firstnode = first.current;\n\tconst lastnode = last.current;\n\n\t_erase(firstnode, lastnode);\n\n\tlet x = first.current;\n\n\twhile (x !== lastnode) {\n\t\t--this.length;\n\t\tx = x.next;\n\t}\n\n\treturn last.copy();\n};\n\nDoublyLinkedList.prototype.reraserange = function (first, last) {\n\tconst firstnode = first.current;\n\tconst lastnode = last.current;\n\n\t_concat(lastnode, firstnode.next);\n\n\tlet x = first.current;\n\n\twhile (x !== lastnode) {\n\t\t--this.length;\n\t\tx = x.prev;\n\t}\n\n\treturn last.copy();\n};\n\nDoublyLinkedList.prototype.shift = function () {\n\tif (this.length === 0) return null;\n\n\tconst node = this.front.next;\n\t_remove(node);\n\n\t--this.length;\n\n\treturn node.value;\n};\n\nDoublyLinkedList.prototype.pop = function () {\n\tif (this.length === 0) return null;\n\n\tconst node = this.back.prev;\n\t_remove(node);\n\n\t--this.length;\n\n\treturn node.value;\n};\n\nDoublyLinkedList.prototype.clear = function () {\n\t_concat(this.front, this.back);\n\tthis.length = 0;\n\treturn this;\n};\n\nDoublyLinkedList.prototype.iterator = function (node) {\n\treturn new Iterator(this.front, this.back, node);\n};\n\nDoublyLinkedList.prototype.riterator = function (node) {\n\treturn new ReverseIterator(this.front, this.back, node);\n};\n\nDoublyLinkedList.prototype.begin = function () {\n\treturn this.iterator(this.front);\n};\n\nDoublyLinkedList.prototype.end = function () {\n\treturn this.iterator(this.back);\n};\n\nDoublyLinkedList.prototype.rbegin = function () {\n\treturn this.riterator(this.back);\n};\n\nDoublyLinkedList.prototype.rend = function () {\n\treturn this.riterator(this.front);\n};\n\nconst from = (iterable) => {\n\tconst list = new DoublyLinkedList();\n\tconst last = _extend(list.front, iterable);\n\t_concat(last, list.back);\n\treturn list;\n};\n\nDoublyLinkedList.prototype[Symbol.iterator] = DoublyLinkedList.prototype.begin;\nDoublyLinkedList.Node = Node;\nDoublyLinkedList.Iterator = Iterator;\nDoublyLinkedList.ReverseIterator = ReverseIterator;\nDoublyLinkedList.from = from;\n",
     "static": true,
     "longname": "/home/runner/work/doubly-linked-list/doubly-linked-list/src/DoublyLinkedList.js",
     "access": "public",
@@ -588,7 +588,7 @@
     "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
     "importStyle": "DoublyLinkedList",
     "description": "Doubly linked list implementation\nmaking use of dummy nodes for the\nsake of simplicity.",
-    "lineNumber": 10,
+    "lineNumber": 19,
     "params": [],
     "return": null
   },
@@ -606,7 +606,7 @@
     "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 17,
+    "lineNumber": 26,
     "undocument": true,
     "params": [
       {
@@ -643,7 +643,7 @@
     "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 28,
+    "lineNumber": 35,
     "undocument": true,
     "params": [
       {
@@ -680,7 +680,7 @@
     "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 39,
+    "lineNumber": 44,
     "undocument": true,
     "params": [
       {
@@ -711,7 +711,7 @@
     "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 43,
+    "lineNumber": 48,
     "undocument": true,
     "params": [
       {
@@ -742,7 +742,7 @@
     "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 47,
+    "lineNumber": 52,
     "undocument": true,
     "params": [
       {
@@ -773,7 +773,7 @@
     "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 57,
+    "lineNumber": 61,
     "undocument": true,
     "params": [
       {
@@ -804,7 +804,7 @@
     "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 67,
+    "lineNumber": 70,
     "undocument": true,
     "params": [
       {
@@ -841,7 +841,7 @@
     "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 84,
+    "lineNumber": 86,
     "undocument": true,
     "params": [
       {
@@ -878,7 +878,7 @@
     "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 101,
+    "lineNumber": 102,
     "undocument": true,
     "params": [],
     "return": {
@@ -902,7 +902,7 @@
     "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 114,
+    "lineNumber": 113,
     "undocument": true,
     "params": [],
     "return": {
@@ -926,7 +926,7 @@
     "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 127,
+    "lineNumber": 124,
     "undocument": true,
     "params": [],
     "return": {
@@ -950,7 +950,7 @@
     "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 134,
+    "lineNumber": 130,
     "undocument": true,
     "params": [
       {
@@ -981,7 +981,7 @@
     "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 138,
+    "lineNumber": 134,
     "undocument": true,
     "params": [
       {
@@ -1012,7 +1012,7 @@
     "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 142,
+    "lineNumber": 138,
     "undocument": true,
     "params": [],
     "return": {
@@ -1036,7 +1036,7 @@
     "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 146,
+    "lineNumber": 142,
     "undocument": true,
     "params": [],
     "return": {
@@ -1060,7 +1060,7 @@
     "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 150,
+    "lineNumber": 146,
     "undocument": true,
     "params": [],
     "return": {
@@ -1084,7 +1084,7 @@
     "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 154,
+    "lineNumber": 150,
     "undocument": true,
     "params": [],
     "return": {
@@ -1108,7 +1108,7 @@
     "importPath": "@list-abstraction/doubly-linked-list/src/DoublyLinkedList.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 158,
+    "lineNumber": 154,
     "undocument": true,
     "params": [
       {
@@ -1249,55 +1249,6 @@
   {
     "__docId__": 73,
     "kind": "file",
-    "name": "src/Node.js",
-    "content": "export default function Node(prev, next, value) {\n\tthis.prev = prev;\n\tthis.next = next;\n\tthis.value = value;\n}\n",
-    "static": true,
-    "longname": "/home/runner/work/doubly-linked-list/doubly-linked-list/src/Node.js",
-    "access": "public",
-    "description": null,
-    "lineNumber": 1
-  },
-  {
-    "__docId__": 74,
-    "kind": "function",
-    "name": "Node",
-    "memberof": "src/Node.js",
-    "generator": false,
-    "async": false,
-    "static": true,
-    "longname": "src/Node.js~Node",
-    "access": "public",
-    "export": true,
-    "importPath": "@list-abstraction/doubly-linked-list/src/Node.js",
-    "importStyle": "Node",
-    "description": null,
-    "lineNumber": 1,
-    "undocument": true,
-    "params": [
-      {
-        "name": "prev",
-        "types": [
-          "*"
-        ]
-      },
-      {
-        "name": "next",
-        "types": [
-          "*"
-        ]
-      },
-      {
-        "name": "value",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": null
-  },
-  {
-    "__docId__": 75,
-    "kind": "file",
     "name": "src/ReverseIterator.js",
     "content": "import Iterator from './Iterator.js';\n\nexport default function ReverseIterator(front, back, current) {\n\tthis.front = front;\n\tthis.back = back;\n\tthis.current = current;\n}\n\nReverseIterator.prototype.copy = function () {\n\treturn new ReverseIterator(this.front, this.back, this.current);\n};\n\nReverseIterator.prototype.prev = Iterator.prototype.next;\nReverseIterator.prototype.next = Iterator.prototype.prev;\n",
     "static": true,
@@ -1307,7 +1258,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 76,
+    "__docId__": 74,
     "kind": "function",
     "name": "ReverseIterator",
     "memberof": "src/ReverseIterator.js",
@@ -1345,7 +1296,7 @@
     "return": null
   },
   {
-    "__docId__": 77,
+    "__docId__": 75,
     "kind": "function",
     "name": "copy",
     "memberof": "src/ReverseIterator.js",
@@ -1369,10 +1320,10 @@
     "ignore": true
   },
   {
-    "__docId__": 78,
+    "__docId__": 76,
     "kind": "file",
     "name": "src/index.js",
-    "content": "import DoublyLinkedList from './DoublyLinkedList.js';\n\nexport {default as DoublyLinkedList} from './DoublyLinkedList.js';\nexport {default as Iterator} from './Iterator.js';\nexport {default as Node} from './Node.js';\nexport {default as ReverseIterator} from './ReverseIterator.js';\nexport const from = DoublyLinkedList.from;\n",
+    "content": "import DoublyLinkedList from './DoublyLinkedList.js';\n\nexport {default as DoublyLinkedList} from './DoublyLinkedList.js';\nexport {default as Iterator} from './Iterator.js';\nexport {default as ReverseIterator} from './ReverseIterator.js';\n\nexport const from = DoublyLinkedList.from;\nexport const Node = DoublyLinkedList.Node;\n",
     "static": true,
     "longname": "/home/runner/work/doubly-linked-list/doubly-linked-list/src/index.js",
     "access": "public",
@@ -1380,7 +1331,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 79,
+    "__docId__": 77,
     "kind": "variable",
     "name": "from",
     "memberof": "src/index.js",
@@ -1400,6 +1351,26 @@
     }
   },
   {
+    "__docId__": 78,
+    "kind": "variable",
+    "name": "Node",
+    "memberof": "src/index.js",
+    "static": true,
+    "longname": "src/index.js~Node",
+    "access": "public",
+    "export": true,
+    "importPath": "@list-abstraction/doubly-linked-list/src/index.js",
+    "importStyle": "{Node}",
+    "description": null,
+    "lineNumber": 8,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
     "kind": "index",
     "content": ":oden:\n[@list-abstraction/doubly-linked-list](https://list-abstraction.github.io/doubly-linked-list)\n==\n\nDoubly linked list for Javascript.\nImplements the specification in\n[@list-abstraction/specification](https://github.com/list-abstraction/specification).\nParent is\n[js-data-structures](https://github.com/make-github-pseudonymous-again/js-data-structures).\n\n```js\nimport { DoublyLinkedList } from '@list-abstraction/doubly-linked-list' ;\n\nlet list = new DoublyLinkedList( ) ;\nfor (const value of 'abc') list.push(value);\n\nfor (const value of list) ... ;\n```\n\n[![License](https://img.shields.io/github/license/list-abstraction/doubly-linked-list.svg)](https://raw.githubusercontent.com/list-abstraction/doubly-linked-list/main/LICENSE)\n[![Version](https://img.shields.io/npm/v/@list-abstraction/doubly-linked-list.svg)](https://www.npmjs.org/package/@list-abstraction/doubly-linked-list)\n[![Tests](https://img.shields.io/github/workflow/status/list-abstraction/doubly-linked-list/ci?event=push&label=tests)](https://github.com/list-abstraction/doubly-linked-list/actions/workflows/ci.yml?query=branch:main)\n[![Dependencies](https://img.shields.io/librariesio/github/list-abstraction/doubly-linked-list.svg)](https://github.com/list-abstraction/doubly-linked-list/network/dependencies)\n[![GitHub issues](https://img.shields.io/github/issues/list-abstraction/doubly-linked-list.svg)](https://github.com/list-abstraction/doubly-linked-list/issues)\n[![Downloads](https://img.shields.io/npm/dm/@list-abstraction/doubly-linked-list.svg)](https://www.npmjs.org/package/@list-abstraction/doubly-linked-list)\n\n[![Code issues](https://img.shields.io/codeclimate/issues/list-abstraction/doubly-linked-list.svg)](https://codeclimate.com/github/list-abstraction/doubly-linked-list/issues)\n[![Code maintainability](https://img.shields.io/codeclimate/maintainability/list-abstraction/doubly-linked-list.svg)](https://codeclimate.com/github/list-abstraction/doubly-linked-list/trends/churn)\n[![Code coverage (cov)](https://img.shields.io/codecov/c/gh/list-abstraction/doubly-linked-list/main.svg)](https://codecov.io/gh/list-abstraction/doubly-linked-list)\n[![Code technical debt](https://img.shields.io/codeclimate/tech-debt/list-abstraction/doubly-linked-list.svg)](https://codeclimate.com/github/list-abstraction/doubly-linked-list/trends/technical_debt)\n[![Documentation](https://list-abstraction.github.io/doubly-linked-list/badge.svg)](https://list-abstraction.github.io/doubly-linked-list/source.html)\n[![Package size](https://img.shields.io/bundlephobia/minzip/@list-abstraction/doubly-linked-list)](https://bundlephobia.com/result?p=@list-abstraction/doubly-linked-list)\n",
     "longname": "/home/runner/work/doubly-linked-list/doubly-linked-list/README.md",
@@ -1409,7 +1380,7 @@
   },
   {
     "kind": "packageJSON",
-    "content": "{\n  \"name\": \"@list-abstraction/doubly-linked-list\",\n  \"description\": \"Doubly linked list for JavaScript\",\n  \"version\": \"8.1.0\",\n  \"license\": \"AGPL-3.0\",\n  \"author\": \"make-github-pseudonymous-again\",\n  \"homepage\": \"https://list-abstraction.github.io/doubly-linked-list\",\n  \"repository\": {\n    \"url\": \"https://github.com/list-abstraction/doubly-linked-list\",\n    \"type\": \"git\"\n  },\n  \"bugs\": {\n    \"url\": \"https://github.com/list-abstraction/doubly-linked-list/issues\"\n  },\n  \"keywords\": [\n    \"bricks\",\n    \"data\",\n    \"dll\",\n    \"doubly\",\n    \"doubly linked list\",\n    \"ender\",\n    \"javascript\",\n    \"js\",\n    \"linked\",\n    \"list\",\n    \"structure\",\n    \"structures\"\n  ],\n  \"sideEffects\": false,\n  \"type\": \"module\",\n  \"source\": \"src/index.js\",\n  \"main\": \"dist/index.cjs\",\n  \"module\": \"dist/index.module.js\",\n  \"esmodule\": \"dist/index.modern.js\",\n  \"umd:main\": \"dist/index.umd.js\",\n  \"unpkg\": \"dist/index.umd.js\",\n  \"exports\": {\n    \".\": {\n      \"browser\": \"./dist/index.module.js\",\n      \"umd\": \"./dist/index.umd.js\",\n      \"require\": \"./dist/index.cjs\",\n      \"default\": \"./dist/index.modern.js\"\n    }\n  },\n  \"files\": [\n    \"dist\"\n  ],\n  \"publishConfig\": {\n    \"access\": \"public\"\n  },\n  \"scripts\": {\n    \"build\": \"NODE_ENV=production microbundle\",\n    \"build-docs\": \"esdoc\",\n    \"build-gh-pages\": \"npm run build-docs\",\n    \"commit-msg\": \"commitlint --edit\",\n    \"cover\": \"NODE_ENV=cover c8 --all --src src --reporter lcov --reporter text-summary --reporter text npm test\",\n    \"debug\": \"NODE_ENV=debug npm run test -- -st --fail-fast\",\n    \"dev\": \"npm run lint-config-and-fix && npm run lint-and-fix && npm run cover -- -- -st --fail-fast\",\n    \"install-hooks\": \"husky install\",\n    \"lint\": \"xo\",\n    \"lint-and-fix\": \"npm run lint -- --fix\",\n    \"lint-config\": \"fixpack --dryRun\",\n    \"lint-config-and-fix\": \"fixpack || fixpack\",\n    \"postinstall\": \"npm run install-hooks\",\n    \"postpublish\": \"pinst --enable\",\n    \"precommit\": \"lint-staged\",\n    \"prepare\": \"npm run build\",\n    \"prepublishOnly\": \"pinst --disable\",\n    \"release\": \"np --message ':hatching_chick: release: Bumping to v%s.'\",\n    \"test\": \"npm run test:src\",\n    \"test-cmd\": \"NODE_LOADER_CONFIG=test/loader/config.js ava\",\n    \"test:cjs\": \"IMPORT_MAP_PATH=test/import-maps/dist/index.json npm run test-cmd\",\n    \"test:dist\": \"npm run test:modern && npm run test:module && npm run test:cjs\",\n    \"test:modern\": \"IMPORT_MAP_PATH=test/import-maps/dist/index.modern.json npm run test-cmd\",\n    \"test:module\": \"IMPORT_MAP_PATH=test/import-maps/dist/index.module.json npm run test-cmd\",\n    \"test:src\": \"IMPORT_MAP_PATH=test/import-maps/src/index.json npm run test-cmd\"\n  },\n  \"dependencies\": {},\n  \"devDependencies\": {\n    \"@babel/core\": \"7.13.10\",\n    \"@babel/plugin-transform-destructuring\": \"7.20.2\",\n    \"@babel/plugin-transform-for-of\": \"7.18.8\",\n    \"@babel/preset-env\": \"7.13.10\",\n    \"@commitlint/cli\": \"17.2.0\",\n    \"@js-library/commitlint-config\": \"0.0.4\",\n    \"@list-abstraction/specification\": \"10.0.0\",\n    \"@node-loader/babel\": \"2.0.1\",\n    \"@node-loader/core\": \"2.0.0\",\n    \"@node-loader/import-maps\": \"1.1.0\",\n    \"ava\": \"4.3.3\",\n    \"babel-plugin-transform-remove-console\": \"6.9.4\",\n    \"babel-plugin-unassert\": \"3.2.0\",\n    \"babel-preset-power-assert\": \"3.0.0\",\n    \"c8\": \"7.12.0\",\n    \"esdoc\": \"1.1.0\",\n    \"esdoc-inject-script-plugin\": \"1.0.0\",\n    \"esdoc-inject-style-plugin\": \"1.0.0\",\n    \"esdoc-standard-plugin\": \"1.0.0\",\n    \"fixpack\": \"4.0.0\",\n    \"husky\": \"8.0.1\",\n    \"lint-staged\": \"13.0.3\",\n    \"microbundle\": \"0.15.1\",\n    \"np\": \"7.4.0\",\n    \"pinst\": \"3.0.0\",\n    \"power-assert\": \"1.6.1\",\n    \"regenerator-runtime\": \"0.13.10\",\n    \"xo\": \"0.52.4\"\n  },\n  \"ava\": {\n    \"files\": [\n      \"test/src/**/*\"\n    ],\n    \"nodeArguments\": [\n      \"--experimental-loader=@node-loader/core\"\n    ],\n    \"require\": [\n      \"regenerator-runtime/runtime\"\n    ],\n    \"timeout\": \"1m\"\n  },\n  \"babel\": {\n    \"sourceMaps\": true,\n    \"plugins\": [\n      \"@babel/plugin-proposal-async-generator-functions\",\n      [\n        \"transform-remove-console\",\n        {\n          \"exclude\": [\n            \"log\",\n            \"error\",\n            \"warn\"\n          ]\n        }\n      ]\n    ],\n    \"env\": {\n      \"debug\": {\n        \"sourceMaps\": \"both\",\n        \"presets\": [\n          \"babel-preset-power-assert\"\n        ],\n        \"plugins\": [\n          [\n            \"transform-remove-console\",\n            {\n              \"exclude\": [\n                \"debug\",\n                \"log\",\n                \"error\",\n                \"warn\"\n              ]\n            }\n          ]\n        ]\n      },\n      \"test\": {\n        \"sourceMaps\": \"both\",\n        \"presets\": [\n          \"babel-preset-power-assert\"\n        ]\n      },\n      \"cover\": {\n        \"sourceMaps\": \"both\",\n        \"presets\": [\n          \"babel-preset-power-assert\"\n        ]\n      },\n      \"development\": {\n        \"presets\": [\n          [\n            \"@babel/preset-env\",\n            {\n              \"targets\": [\n                \"defaults\",\n                \"maintained node versions\"\n              ]\n            }\n          ],\n          \"babel-preset-power-assert\"\n        ]\n      },\n      \"production\": {\n        \"presets\": [\n          [\n            \"@babel/preset-env\",\n            {\n              \"targets\": [\n                \"defaults\",\n                \"maintained node versions\"\n              ]\n            }\n          ]\n        ],\n        \"plugins\": [\n          \"@babel/plugin-transform-destructuring\",\n          \"@babel/plugin-transform-for-of\",\n          \"babel-plugin-unassert\"\n        ]\n      }\n    }\n  },\n  \"lint-staged\": {\n    \"*.js\": [\n      \"npm run lint-and-fix\"\n    ],\n    \"package.json\": [\n      \"npm run lint-config-and-fix\"\n    ]\n  },\n  \"prettier\": {\n    \"trailingComma\": \"all\"\n  },\n  \"xo\": {\n    \"prettier\": true,\n    \"plugins\": [\n      \"unicorn\"\n    ],\n    \"rules\": {\n      \"unicorn/filename-case\": \"off\",\n      \"camelcase\": \"off\",\n      \"unicorn/prevent-abbreviations\": \"off\",\n      \"no-constant-condition\": \"off\",\n      \"unicorn/prefer-node-protocol\": \"off\",\n      \"unicorn/prefer-math-trunc\": \"off\",\n      \"unicorn/no-new-array\": \"off\",\n      \"no-negated-condition\": \"off\"\n    },\n    \"overrides\": [\n      {\n        \"files\": [\n          \"doc/**\"\n        ],\n        \"env\": \"browser\"\n      }\n    ]\n  }\n}\n",
+    "content": "{\n  \"name\": \"@list-abstraction/doubly-linked-list\",\n  \"description\": \"Doubly linked list for JavaScript\",\n  \"version\": \"9.0.0\",\n  \"license\": \"AGPL-3.0\",\n  \"author\": \"make-github-pseudonymous-again\",\n  \"homepage\": \"https://list-abstraction.github.io/doubly-linked-list\",\n  \"repository\": {\n    \"url\": \"https://github.com/list-abstraction/doubly-linked-list\",\n    \"type\": \"git\"\n  },\n  \"bugs\": {\n    \"url\": \"https://github.com/list-abstraction/doubly-linked-list/issues\"\n  },\n  \"keywords\": [\n    \"bricks\",\n    \"data\",\n    \"dll\",\n    \"doubly\",\n    \"doubly linked list\",\n    \"ender\",\n    \"javascript\",\n    \"js\",\n    \"linked\",\n    \"list\",\n    \"structure\",\n    \"structures\"\n  ],\n  \"sideEffects\": false,\n  \"type\": \"module\",\n  \"source\": \"src/index.js\",\n  \"main\": \"dist/index.cjs\",\n  \"module\": \"dist/index.module.js\",\n  \"esmodule\": \"dist/index.modern.js\",\n  \"umd:main\": \"dist/index.umd.js\",\n  \"unpkg\": \"dist/index.umd.js\",\n  \"exports\": {\n    \".\": {\n      \"browser\": \"./dist/index.module.js\",\n      \"umd\": \"./dist/index.umd.js\",\n      \"require\": \"./dist/index.cjs\",\n      \"default\": \"./dist/index.modern.js\"\n    }\n  },\n  \"files\": [\n    \"dist\"\n  ],\n  \"publishConfig\": {\n    \"access\": \"public\"\n  },\n  \"scripts\": {\n    \"build\": \"NODE_ENV=production microbundle\",\n    \"build-docs\": \"esdoc\",\n    \"build-gh-pages\": \"npm run build-docs\",\n    \"commit-msg\": \"commitlint --edit\",\n    \"cover\": \"NODE_ENV=cover c8 --all --src src --reporter lcov --reporter text-summary --reporter text npm test\",\n    \"debug\": \"NODE_ENV=debug npm run test -- -st --fail-fast\",\n    \"dev\": \"npm run lint-config-and-fix && npm run lint-and-fix && npm run cover -- -- -st --fail-fast\",\n    \"install-hooks\": \"husky install\",\n    \"lint\": \"xo\",\n    \"lint-and-fix\": \"npm run lint -- --fix\",\n    \"lint-config\": \"fixpack --dryRun\",\n    \"lint-config-and-fix\": \"fixpack || fixpack\",\n    \"postinstall\": \"npm run install-hooks\",\n    \"postpublish\": \"pinst --enable\",\n    \"precommit\": \"lint-staged\",\n    \"prepare\": \"npm run build\",\n    \"prepublishOnly\": \"pinst --disable\",\n    \"release\": \"np --message ':hatching_chick: release: Bumping to v%s.'\",\n    \"test\": \"npm run test:src\",\n    \"test-cmd\": \"NODE_LOADER_CONFIG=test/loader/config.js ava\",\n    \"test:cjs\": \"IMPORT_MAP_PATH=test/import-maps/dist/index.json npm run test-cmd\",\n    \"test:dist\": \"npm run test:modern && npm run test:module && npm run test:cjs\",\n    \"test:modern\": \"IMPORT_MAP_PATH=test/import-maps/dist/index.modern.json npm run test-cmd\",\n    \"test:module\": \"IMPORT_MAP_PATH=test/import-maps/dist/index.module.json npm run test-cmd\",\n    \"test:src\": \"IMPORT_MAP_PATH=test/import-maps/src/index.json npm run test-cmd\"\n  },\n  \"dependencies\": {\n    \"@data-structure-algebra/doubly-linked-list\": \"^1.0.0\"\n  },\n  \"devDependencies\": {\n    \"@babel/core\": \"7.20.2\",\n    \"@babel/plugin-transform-destructuring\": \"7.20.2\",\n    \"@babel/plugin-transform-for-of\": \"7.18.8\",\n    \"@babel/preset-env\": \"7.20.2\",\n    \"@commitlint/cli\": \"17.2.0\",\n    \"@js-library/commitlint-config\": \"0.0.4\",\n    \"@list-abstraction/specification\": \"10.0.0\",\n    \"@node-loader/babel\": \"2.0.1\",\n    \"@node-loader/core\": \"2.0.0\",\n    \"@node-loader/import-maps\": \"1.1.0\",\n    \"ava\": \"5.0.1\",\n    \"babel-plugin-transform-remove-console\": \"6.9.4\",\n    \"babel-plugin-unassert\": \"3.2.0\",\n    \"babel-preset-power-assert\": \"3.0.0\",\n    \"c8\": \"7.12.0\",\n    \"esdoc\": \"1.1.0\",\n    \"esdoc-inject-script-plugin\": \"1.0.0\",\n    \"esdoc-inject-style-plugin\": \"1.0.0\",\n    \"esdoc-standard-plugin\": \"1.0.0\",\n    \"fixpack\": \"4.0.0\",\n    \"husky\": \"8.0.2\",\n    \"lint-staged\": \"13.0.3\",\n    \"microbundle\": \"0.15.1\",\n    \"np\": \"7.6.2\",\n    \"pinst\": \"3.0.0\",\n    \"power-assert\": \"1.6.1\",\n    \"regenerator-runtime\": \"0.13.10\",\n    \"xo\": \"0.52.4\"\n  },\n  \"ava\": {\n    \"files\": [\n      \"test/src/**/*\"\n    ],\n    \"nodeArguments\": [\n      \"--experimental-loader=@node-loader/core\"\n    ],\n    \"require\": [\n      \"regenerator-runtime/runtime\"\n    ],\n    \"timeout\": \"1m\"\n  },\n  \"babel\": {\n    \"sourceMaps\": true,\n    \"plugins\": [\n      \"@babel/plugin-proposal-async-generator-functions\",\n      [\n        \"transform-remove-console\",\n        {\n          \"exclude\": [\n            \"log\",\n            \"error\",\n            \"warn\"\n          ]\n        }\n      ]\n    ],\n    \"env\": {\n      \"debug\": {\n        \"sourceMaps\": \"both\",\n        \"presets\": [\n          \"babel-preset-power-assert\"\n        ],\n        \"plugins\": [\n          [\n            \"transform-remove-console\",\n            {\n              \"exclude\": [\n                \"debug\",\n                \"log\",\n                \"error\",\n                \"warn\"\n              ]\n            }\n          ]\n        ]\n      },\n      \"test\": {\n        \"sourceMaps\": \"both\",\n        \"presets\": [\n          \"babel-preset-power-assert\"\n        ]\n      },\n      \"cover\": {\n        \"sourceMaps\": \"both\",\n        \"presets\": [\n          \"babel-preset-power-assert\"\n        ]\n      },\n      \"development\": {\n        \"presets\": [\n          [\n            \"@babel/preset-env\",\n            {\n              \"targets\": [\n                \"defaults\",\n                \"maintained node versions\"\n              ]\n            }\n          ],\n          \"babel-preset-power-assert\"\n        ]\n      },\n      \"production\": {\n        \"presets\": [\n          [\n            \"@babel/preset-env\",\n            {\n              \"targets\": [\n                \"defaults\",\n                \"maintained node versions\"\n              ]\n            }\n          ]\n        ],\n        \"plugins\": [\n          \"@babel/plugin-transform-destructuring\",\n          \"@babel/plugin-transform-for-of\",\n          \"babel-plugin-unassert\"\n        ]\n      }\n    }\n  },\n  \"lint-staged\": {\n    \"*.js\": [\n      \"npm run lint-and-fix\"\n    ],\n    \"package.json\": [\n      \"npm run lint-config-and-fix\"\n    ]\n  },\n  \"prettier\": {\n    \"trailingComma\": \"all\"\n  },\n  \"xo\": {\n    \"prettier\": true,\n    \"plugins\": [\n      \"unicorn\"\n    ],\n    \"rules\": {\n      \"unicorn/filename-case\": \"off\",\n      \"camelcase\": \"off\",\n      \"unicorn/prevent-abbreviations\": \"off\",\n      \"no-constant-condition\": \"off\",\n      \"unicorn/prefer-node-protocol\": \"off\",\n      \"unicorn/prefer-math-trunc\": \"off\",\n      \"unicorn/no-new-array\": \"off\",\n      \"no-negated-condition\": \"off\"\n    },\n    \"overrides\": [\n      {\n        \"files\": [\n          \"doc/**\"\n        ],\n        \"env\": \"browser\"\n      }\n    ]\n  }\n}\n",
     "longname": "/home/runner/work/doubly-linked-list/doubly-linked-list/package.json",
     "name": "package.json",
     "static": true,
@@ -1454,16 +1425,5 @@
     "content": "# Examples\n\n> More examples in [the test files](https://github.com/list-abstraction/doubly-linked-list/tree/main/test/src).\n\n```js\nimport { DoublyLinkedList as List } from '@list-abstraction/doubly-linked-list' ;\n\nlet list = new List( ) ;\n\nlet iterators = [ 0 , 1 , 2 ].map( (x) => list.push( x ) ) ;\n\nArray.from( list ) ; // [ 0 , 1 , 2 ]\n\nlist.erase( iterator[1] ) ; // removes `1` from the list\n\nArray.from( list ) ; // [ 0 , 2 ]\n\n// note that other iterators remain valid\n\niterator[0].current.value = 0 ;\niterator[2].current.value = 2 ;\n\niterator[0].next( ) ; // { value : 2 , done : false }\niterator[0].next( ) ; // { done : true }\n\niterator[0].prev( ) ; // { value : 2 , done : false }\niterator[0].prev( ) ; // { value : 0 , done : false }\niterator[0].prev( ) ; // { done : true }\n\niterator[2].prev( ) ; // { value : 0 , done : false }\niterator[2].prev( ) ; // { done : true }\n\niterator[2].next( ) ; // { value : 0 , done : false }\niterator[2].next( ) ; // { value : 2 , done : false }\niterator[2].next( ) ; // { done : true }\n\n// SUPPORTED METHODS\n\n// Constructor\nList ; // new ( ) -> List\n\n// number of elements in the list\nlist.length ; // integer\n\n// returns iterator at the beginning of the list\nList.prototype[Symbol.iterator] ; // ( ) -> iterator\n\n// inserts value after iterator, returns new iterator\nList.prototype.insertAfter ;      // ( iterator , value ) -> iterator\n\n// inserts value before iterator, returns new iterator\nList.prototype.insertBefore ;     // ( iterator , value ) -> iterator\n\n// inserts value at the beginning of the list, returns new iterator\nList.prototype.unshift ;          // ( value ) -> iterator\n\n// inserts value at the end of the list, returns new iterator\nList.prototype.push ;             // ( value ) -> iterator\n\n// erases iterator, returns next iterator\nList.prototype.erase ;            // ( iterator ) -> iterator {next}\n\n// erases iterator, returns previous iterator\nList.prototype.rerase ;           // ( iterator ) -> iterator {prev}\n\n// erases iterators in [first, last[, returns a copy of last\nList.prototype.eraserange ;       // ( first , last ) -> iterator\n\n// erases iterator at the beginning of the list, returns associated value\nList.prototype.shift ;            // ( ) -> value\n\n// erases iterator at the end of the list, returns associated value\nList.prototype.pop ;              // ( ) -> value\n\n// erases the contents of the list\nList.prototype.clear ;            // ( ) -> self\n\n// returns iterator at the beginning of the list\nList.prototype.begin ;            // ( ) -> iterator\n\n// returns iterator at the end of the list\nList.prototype.end ;              // ( ) -> iterator\n\n// returns reverse iterator at the end of the list\nList.prototype.rbegin ;           // ( ) -> iterator\n\n// returns reverse iterator at the beginning of the list\nList.prototype.rend ;             // ( ) -> iterator\n\n// returns a copy of self\nIterator.prototype.copy ;         // ( ) -> iterator\n\n// returns a copy of self\nReverseIterator.prototype.copy ;  // ( ) -> iterator\n\n// moves iterator one step forward, standard iterator protocol return object\nIterator.prototype.next ;         // ( ) -> { done , value }\n\n// moves iterator one step backward, standard iterator protocol return object\nIterator.prototype.prev ;         // ( ) -> { done , value }\n\n// moves iterator one step forward, standard iterator protocol return object\nReverseIterator.prototype.next ;  // ( ) -> { done , value }\n\n// moves iterator one step backward, standard iterator protocol return object\nReverseIterator.prototype.prev ;  // ( ) -> { done , value }\n```\n",
     "static": true,
     "access": "public"
-  },
-  {
-    "__docId__": 80,
-    "kind": "testFile",
-    "name": "src/list-spec.js",
-    "content": "import test from 'ava';\nimport * as spec from '@list-abstraction/specification';\nimport * as dll from '#module';\n\nspec.test(test, 'DoublyLinkedList', dll.DoublyLinkedList);\n",
-    "static": true,
-    "longname": "/home/runner/work/doubly-linked-list/doubly-linked-list/test/src/list-spec.js",
-    "access": null,
-    "description": null,
-    "lineNumber": 1
   }
 ]

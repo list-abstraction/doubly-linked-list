@@ -7,24 +7,24 @@
       "expectCount": 19,
       "actualCount": 1,
       "undocumentLines": [
-        17,
-        28,
-        39,
-        43,
-        47,
-        57,
-        67,
-        84,
-        101,
-        114,
-        127,
+        26,
+        35,
+        44,
+        48,
+        52,
+        61,
+        70,
+        86,
+        102,
+        113,
+        124,
+        130,
         134,
         138,
         142,
         146,
         150,
-        154,
-        158
+        154
       ]
     },
     "src/Iterator.js": {
@@ -37,13 +37,6 @@
         18
       ]
     },
-    "src/Node.js": {
-      "expectCount": 1,
-      "actualCount": 0,
-      "undocumentLines": [
-        1
-      ]
-    },
     "src/ReverseIterator.js": {
       "expectCount": 2,
       "actualCount": 0,
@@ -53,10 +46,11 @@
       ]
     },
     "src/index.js": {
-      "expectCount": 1,
+      "expectCount": 2,
       "actualCount": 0,
       "undocumentLines": [
-        7
+        7,
+        8
       ]
     }
   }

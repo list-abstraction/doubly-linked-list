@@ -12,10 +12,10 @@ window.esdocSearchIndex = [
     "function"
   ],
   [
-    "@list-abstraction/doubly-linked-list/src/node.js~node",
-    "function/index.html#static-function-Node",
-    "<span>Node</span> <span class=\"search-result-import-path\">@list-abstraction/doubly-linked-list/src/Node.js</span>",
-    "function"
+    "@list-abstraction/doubly-linked-list/src/index.js~node",
+    "variable/index.html#static-variable-Node",
+    "<span>Node</span> <span class=\"search-result-import-path\">@list-abstraction/doubly-linked-list/src/index.js</span>",
+    "variable"
   ],
   [
     "@list-abstraction/doubly-linked-list/src/reverseiterator.js~reverseiterator",
@@ -324,12 +324,6 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/node.js",
-    "file/src/Node.js.html",
-    "src/Node.js",
-    "file"
-  ],
-  [
     "src/reverseiterator.js",
     "file/src/ReverseIterator.js.html",
     "src/ReverseIterator.js",
@@ -340,11 +334,5 @@ window.esdocSearchIndex = [
     "file/src/index.js.html",
     "src/index.js",
     "file"
-  ],
-  [
-    "src/list-spec.js",
-    "test-file/src/list-spec.js.html",
-    "src/list-spec.js",
-    "testFile"
   ]
 ]
