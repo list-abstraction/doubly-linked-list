@@ -75,7 +75,9 @@
     "test:module": "IMPORT_MAP_PATH=test/import-maps/dist/index.module.json npm run test-cmd",
     "test:src": "IMPORT_MAP_PATH=test/import-maps/src/index.json npm run test-cmd"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@data-structure-algebra/doubly-linked-list": "^1.0.0"
+  },
   "devDependencies": {
     "@babel/core": "7.20.2",
     "@babel/plugin-transform-destructuring": "7.20.2",

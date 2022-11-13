@@ -1,4 +1,13 @@
-import Node from './Node.js';
+import {
+	Node,
+	_concat,
+	_erase,
+	_extend,
+	_remove,
+	_insertAfter,
+	_insertBefore,
+} from '@data-structure-algebra/doubly-linked-list';
+
 import Iterator from './Iterator.js';
 import ReverseIterator from './ReverseIterator.js';
 
@@ -9,7 +18,7 @@ import ReverseIterator from './ReverseIterator.js';
  */
 export default function DoublyLinkedList() {
 	this.front = new Node(null, null, null);
-	this.back = new Node(this.front, null, null);
+	this.back = new Node(null, this.front, null);
 	this.front.next = this.back;
 	this.length = 0;
 }
@@ -17,9 +26,7 @@ export default function DoublyLinkedList() {
 DoublyLinkedList.prototype.insertAfter = function (iterator, value) {
 	const prev = iterator.current;
 
-	const node = new Node(prev, prev.next, value);
-	prev.next.prev = node;
-	prev.next = node;
+	const node = _insertAfter(prev, value);
 
 	++this.length;
 	return this.iterator(node);
@@ -28,9 +35,7 @@ DoublyLinkedList.prototype.insertAfter = function (iterator, value) {
 DoublyLinkedList.prototype.insertBefore = function (iterator, value) {
 	const next = iterator.current;
 
-	const node = new Node(next.prev, next, value);
-	next.prev.next = node;
-	next.prev = node;
+	const node = _insertBefore(next, value);
 
 	++this.length;
 	return this.iterator(node);
@@ -47,8 +52,7 @@ DoublyLinkedList.prototype.push = function (value) {
 DoublyLinkedList.prototype.erase = function (iterator) {
 	const node = iterator.current;
 
-	node.prev.next = node.next;
-	node.next.prev = node.prev;
+	_remove(node);
 
 	--this.length;
 	return this.iterator(node.next);
@@ -57,8 +61,7 @@ DoublyLinkedList.prototype.erase = function (iterator) {
 DoublyLinkedList.prototype.rerase = function (iterator) {
 	const node = iterator.current;
 
-	node.next.prev = node.prev;
-	node.prev.next = node.next;
+	_remove(node);
 
 	--this.length;
 	return this.iterator(node.prev);
@@ -68,14 +71,13 @@ DoublyLinkedList.prototype.eraserange = function (first, last) {
 	const firstnode = first.current;
 	const lastnode = last.current;
 
-	lastnode.prev = firstnode.prev;
-	firstnode.prev.next = lastnode;
+	_erase(firstnode, lastnode);
 
-	const it = first.copy();
+	let x = first.current;
 
-	while (it.current !== lastnode) {
+	while (x !== lastnode) {
 		--this.length;
-		it.next();
+		x = x.next;
 	}
 
 	return last.copy();
@@ -85,14 +87,13 @@ DoublyLinkedList.prototype.reraserange = function (first, last) {
 	const firstnode = first.current;
 	const lastnode = last.current;
 
-	lastnode.next = firstnode.next;
-	firstnode.next.prev = lastnode;
+	_concat(lastnode, firstnode.next);
 
-	const it = first.copy();
+	let x = first.current;
 
-	while (it.current !== lastnode) {
+	while (x !== lastnode) {
 		--this.length;
-		it.next();
+		x = x.prev;
 	}
 
 	return last.copy();
@@ -102,9 +103,7 @@ DoublyLinkedList.prototype.shift = function () {
 	if (this.length === 0) return null;
 
 	const node = this.front.next;
-
-	this.front.next = node.next;
-	node.next.prev = this.front;
+	_remove(node);
 
 	--this.length;
 
@@ -115,9 +114,7 @@ DoublyLinkedList.prototype.pop = function () {
 	if (this.length === 0) return null;
 
 	const node = this.back.prev;
-
-	this.back.prev = node.prev;
-	node.prev.next = this.back;
+	_remove(node);
 
 	--this.length;
 
@@ -125,8 +122,7 @@ DoublyLinkedList.prototype.pop = function () {
 };
 
 DoublyLinkedList.prototype.clear = function () {
-	this.front.next = this.back;
-	this.back.prev = this.front;
+	_concat(this.front, this.back);
 	this.length = 0;
 	return this;
 };
@@ -157,7 +153,8 @@ DoublyLinkedList.prototype.rend = function () {
 
 const from = (iterable) => {
 	const list = new DoublyLinkedList();
-	for (const value of iterable) list.push(value);
+	const last = _extend(list.front, iterable);
+	_concat(last, list.back);
 	return list;
 };
 

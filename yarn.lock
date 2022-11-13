@@ -1151,6 +1151,11 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
+"@data-structure-algebra/doubly-linked-list@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@data-structure-algebra/doubly-linked-list/-/doubly-linked-list-1.0.0.tgz#1bfbb25136fd364ba6c101833fdf199a67cdec51"
+  integrity sha512-ZC+tPhRcwsSUX/FcO4mBmSzMgFL4yLBYrTSOuHyAyTEcmLv7GVX1rt5EJAFXzMsKp941zGiWqHi5amlZhnYlNQ==
+
 "@eslint/eslintrc@^1.3.0", "@eslint/eslintrc@^1.3.3":
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/@eslint/eslintrc/-/eslintrc-1.3.3.tgz#2b044ab39fdfa75b4688184f9e573ce3c5b0ff95"
