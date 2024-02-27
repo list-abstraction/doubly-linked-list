@@ -17,7 +17,7 @@ for (const value of list) ... ;
 
 [![License](https://img.shields.io/github/license/list-abstraction/doubly-linked-list.svg)](https://raw.githubusercontent.com/list-abstraction/doubly-linked-list/main/LICENSE)
 [![Version](https://img.shields.io/npm/v/@list-abstraction/doubly-linked-list.svg)](https://www.npmjs.org/package/@list-abstraction/doubly-linked-list)
-[![Tests](https://img.shields.io/github/workflow/status/list-abstraction/doubly-linked-list/ci?event=push&label=tests)](https://github.com/list-abstraction/doubly-linked-list/actions/workflows/ci.yml?query=branch:main)
+[![Tests](https://img.shields.io/github/actions/workflow/status/list-abstraction/doubly-linked-list/ci.yml?branch=main&event=push&label=tests)](https://github.com/list-abstraction/doubly-linked-list/actions/workflows/ci.yml?query=branch:main)
 [![Dependencies](https://img.shields.io/librariesio/github/list-abstraction/doubly-linked-list.svg)](https://github.com/list-abstraction/doubly-linked-list/network/dependencies)
 [![GitHub issues](https://img.shields.io/github/issues/list-abstraction/doubly-linked-list.svg)](https://github.com/list-abstraction/doubly-linked-list/issues)
 [![Downloads](https://img.shields.io/npm/dm/@list-abstraction/doubly-linked-list.svg)](https://www.npmjs.org/package/@list-abstraction/doubly-linked-list)
