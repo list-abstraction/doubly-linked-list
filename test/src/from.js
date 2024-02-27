@@ -1,4 +1,5 @@
 import test from 'ava';
+
 import {from, DoublyLinkedList} from '#module';
 
 test('from is DoublyLinkedList.from', (t) => {

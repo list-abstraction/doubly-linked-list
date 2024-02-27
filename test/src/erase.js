@@ -1,4 +1,5 @@
 import test from 'ava';
+
 import {DoublyLinkedList} from '#module';
 
 test('DoublyLinkedList', (t) => {
