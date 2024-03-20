@@ -79,10 +79,10 @@
     "@data-structure-algebra/doubly-linked-list": "^1.0.0"
   },
   "devDependencies": {
-    "@babel/core": "7.24.0",
-    "@babel/plugin-transform-destructuring": "7.23.3",
-    "@babel/plugin-transform-for-of": "7.23.6",
-    "@babel/preset-env": "7.24.0",
+    "@babel/core": "7.24.1",
+    "@babel/plugin-transform-destructuring": "7.24.1",
+    "@babel/plugin-transform-for-of": "7.24.1",
+    "@babel/preset-env": "7.24.1",
     "@commitlint/cli": "19.2.1",
     "@js-library/commitlint-config": "0.0.4",
     "@list-abstraction/specification": "10.0.0",
