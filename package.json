@@ -79,8 +79,8 @@
     "@data-structure-algebra/doubly-linked-list": "^1.0.0"
   },
   "devDependencies": {
-    "@babel/core": "7.27.4",
-    "@babel/plugin-transform-destructuring": "7.27.3",
+    "@babel/core": "7.27.7",
+    "@babel/plugin-transform-destructuring": "7.27.7",
     "@babel/plugin-transform-for-of": "7.27.1",
     "@babel/preset-env": "7.27.2",
     "@commitlint/cli": "19.8.1",
